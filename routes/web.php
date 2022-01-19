@@ -19,3 +19,7 @@ Route::get('/', function () {
 
 //Admin - Settings
 Route::view('/sms-settings','admin.settings.sms')->name('sms-settings');
+//Admin - Order Management
+Route::view('/waybill-reservation','admin.order-management.waybill-reservation')->name('waybill-reservation');
+Route::view('/create-order','admin.order-management.create-order')->name('create-order');
+Route::view('/my-orders','admin.order-management.my-orders')->name('my-orders');
