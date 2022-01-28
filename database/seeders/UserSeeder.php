@@ -16,7 +16,8 @@ class UserSeeder extends Seeder
     public function run()
     {
         $users = [
-            'sajana' => ['name' => 'Institute', 'email' => 'ins@ins.lk', 'password' => 'password']
+            'Sangeeth' => ['name' => 'Sangeeth Fernando', 'email' => 'sangeeth@qds.lk', 'password' => 'password', 'org_id' => 1],
+            'Isuru' => ['name' => 'Isuru Fernando', 'email' => 'isuru@qds.lk', 'password' => 'password', 'org_id' => 1]
         ];
 
         foreach($users as $user){
@@ -24,7 +25,8 @@ class UserSeeder extends Seeder
                 'name' => $user['name'],
                 'email' => $user['email'],
                 'password' => Hash::make($user['password']),
-                'email_verified_at' => date('Y-m-d H:i:s')
+                'email_verified_at' => date('Y-m-d H:i:s'),
+                'org_id' => $user['org_id'],
             ]);
         }
     }

@@ -19,6 +19,9 @@ class CreateSettingsTable extends Migration
             $table->string('feature')->unique();
             $table->unsignedBigInteger('option')->nullable();
             $table->string('relevent_model')->nullable();
+
+            $table->unsignedBigInteger('org_id');
+            $table->foreign('org_id')->references('org_id')->on('organizations');
             
             $table->timestamps();
         });

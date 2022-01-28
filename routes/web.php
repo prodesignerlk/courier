@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\WaybillController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,17 +16,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Auth::routes();
 
-//Admin - Settings
+//dashboard
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+//Settings
 Route::view('/sms-settings','admin.settings.sms')->name('sms-settings');
-//Admin - Order Management
-Route::view('/waybill-reservation','admin.order-management.waybill-reservation')->name('waybill-reservation');
+
+//Order Mgt
+Route::get('/waybill-reservation', [WaybillController::class, 'waybill_reservation_get'])->name('waybill-reservation');
+
+
 Route::view('/create-order','admin.order-management.create-order')->name('create-order');
 Route::view('/my-orders','admin.order-management.my-orders')->name('my-orders');
 Route::view('/barcode-print','admin.order-management.barcode-print')->name('barcode-print');
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//logout
+Route::get('/logout', function() {
+    Auth::logout();
+    return redirect('/login');
+});
+

@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'org_id',
     ];
 
     /**
@@ -46,5 +47,10 @@ class User extends Authenticatable
     public function seller()
     {
         return $this->hasOne(Seller::class);
+    }
+
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class, 'org_id');
     }
 }

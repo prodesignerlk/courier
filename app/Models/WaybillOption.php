@@ -19,6 +19,6 @@ class WaybillOption extends Model
     ];
     public function setting()
     {
-        return $this->hasOne(Setting::class, 'option', 'waybill_option_id');
+        return $this->hasMany(Setting::class, 'option', 'waybill_option_id');
     }
 }

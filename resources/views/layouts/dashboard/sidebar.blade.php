@@ -29,9 +29,20 @@
                 </a>
                 <div class="collapse" id="odr_mng">
                     <ul class="nav sub-menu">
-                        <li class="nav-item">
-                            <a href="{{route('waybill-reservation')}}" class="nav-link">Waybill Reservation</a>
-                        </li>
+                        @php
+                            //Waybill reservation feature check
+                            $org = Auth::user()->org_id;
+                            $waybill_option = App\Models\Setting::where([['org_id', $org], ['feature', 'waybill_option']])->first()->waybill_option;
+                
+                        @endphp
+
+                        @if ($waybill_option->option == 'Manual_range' || $waybill_option->option == 'Manual_qnt')
+                            @can('waybill-reservation.view')
+                                <li class="nav-item">
+                                    <a href="{{route('waybill-reservation')}}" class="nav-link">Waybill Reservation</a>
+                                </li>
+                            @endcan
+                        @endif
                         <li class="nav-item">
                             <a href="{{route('create-order')}}" class="nav-link">Create Order</a>
                         </li>

@@ -17,6 +17,7 @@ class Setting extends Model
         'feature',
         'option',
         'relevent_model',
+        'org_id'
     ];
 
     public function waybill_option()
@@ -27,5 +28,10 @@ class Setting extends Model
     public function sms_option()
     {
         return $this->belongsTo(SmsOption::class, 'option', 'sms_option_id');
+    }
+
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class, 'org_id');
     }
 }
