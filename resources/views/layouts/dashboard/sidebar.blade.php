@@ -38,6 +38,9 @@
                         <li class="nav-item">
                             <a href="{{route('my-orders')}}" class="nav-link">My Orders</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('barcode-print')}}" class="nav-link">Barcode Print</a>
+                        </li>
                     </ul>
                 </div>
             </li>

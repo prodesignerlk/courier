@@ -56,7 +56,7 @@
                 <p>Reserved Waybills</p>
             </div>
             <div class="card-body">
-                <div class="table-resposive">
+                <div class="table-resposnive">
                     <table class="table table-bordered" id="datatable-basic">
                         <thead>
                             <tr>
