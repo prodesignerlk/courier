@@ -24,3 +24,6 @@ Route::view('/waybill-reservation','admin.order-management.waybill-reservation')
 Route::view('/create-order','admin.order-management.create-order')->name('create-order');
 Route::view('/my-orders','admin.order-management.my-orders')->name('my-orders');
 Route::view('/barcode-print','admin.order-management.barcode-print')->name('barcode-print');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
