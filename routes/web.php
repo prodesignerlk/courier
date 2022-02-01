@@ -38,3 +38,12 @@ Route::get('/logout', function() {
     return redirect('/login');
 });
 
+Route::get('/general-settings', function () {
+    return view('/settings/general');
+});
+Route::get('/waybill-settings', function () {
+    return view('/settings/waybill-settings');
+});
+Route::get('/default-settings', function () {
+    return view('/settings/default-settings');
+});
