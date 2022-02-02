@@ -20,6 +20,9 @@ class CreateWaybillOptionsTable extends Migration
             $table->string('option')->unique();
             $table->text('description')->nullable();
             
+            $table->unsignedBigInteger('org_id');
+            $table->foreign('org_id')->references('org_id')->on('organizations');
+            
             $table->timestamps();
         });
     }

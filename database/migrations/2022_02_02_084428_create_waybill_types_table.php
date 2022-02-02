@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSmsOptionsTable extends Migration
+class CreateWaybillTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,14 @@ class CreateSmsOptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sms_options', function (Blueprint $table) {
-            $table->id('sms_option_id');
-
-            //details
-            $table->string('option')->unique();
+        Schema::create('waybill_types', function (Blueprint $table) {
+            $table->id('waybill_type_id');
+            $table->string('type');
             $table->text('description')->nullable();
-            
-            //api
-            $table->string('api_key')->nullable();
-            $table->string('api_secret')->nullable();
 
             $table->unsignedBigInteger('org_id');
             $table->foreign('org_id')->references('org_id')->on('organizations');
-
+            
             $table->timestamps();
         });
     }
@@ -38,6 +32,6 @@ class CreateSmsOptionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sms_options');
+        Schema::dropIfExists('waybill_types');
     }
 }

@@ -31,12 +31,15 @@
                     <ul class="nav sub-menu">
                         @php
                             //Waybill reservation feature check
-                            $org = Auth::user()->org_id;
-                            $waybill_option = App\Models\Setting::where([['org_id', $org], ['feature', 'waybill_option']])->first()->waybill_option;
+                            if(Auth::check()){
+                                $org = Auth::user()->org_id;
+                                $waybill_option = App\Models\Setting::where([['org_id', $org], ['feature', 'waybill_option']])->first()->waybill_option;
+                            }else{
+                                $waybill_option = null;
+                            }
                 
                         @endphp
-
-                        @if ($waybill_option->option == 'Manual_range' || $waybill_option->option == 'Manual_qnt')
+                        @if ($waybill_option != null && ($waybill_option->option == 'Manual_range' || $waybill_option->option == 'Manual_qnt'))
                             @can('waybill-reservation.view')
                                 <li class="nav-item">
                                     <a href="{{route('waybill-reservation')}}" class="nav-link">Waybill Reservation</a>
@@ -65,6 +68,15 @@
                     <ul class="nav sub-menu">
                         <li class="nav-item">
                             <a href="{{route('sms-settings')}}" class="nav-link">SMS Settings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('general-settings')}}" class="nav-link">General Settings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('waybill-settings')}}" class="nav-link">Waybill Settings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('default-settings')}}" class="nav-link">Default Settings</a>
                         </li>
                     </ul>
                 </div>

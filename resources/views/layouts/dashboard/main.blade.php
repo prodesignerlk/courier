@@ -138,10 +138,12 @@
             </nav>
             <div class="page-content">
                 @yield('content')
+                
             </div>
             <footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between">
                 <p class="text-muted text-center text-md-left">Copyright © 2021 <a href="https://www.prodesigner.lk" target="_blank">PRODESIGNER.LK (PVT) LTD</a>. All rights reserved</p>
-                <p class="text-muted text-center text-md-left mb-0 d-none d-md-block">Handcrafted With <i class="mb-1 text-primary ml-1 icon-small" data-feather="heart"></i> of Laravel</p>
+                {{-- <p class="text-muted text-center text-md-left mb-0 d-none d-md-block">Handcrafted With <i class="mb-1 text-primary ml-1 icon-small" data-feather="heart"></i> of Laravel</p> --}}
+                <p class="text-muted text-center text-md-left mb-0 d-none d-md-block">v{{ env('APP_VERSION') }}</p>
             </footer>
         </div>
     </div>
@@ -184,21 +186,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"></script>
-    <script>
-        $(document).ready(function() {
-
-            var table = $('#datatable-basic').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
-                ],
-                "order": [
-                    [0, "desc"]
-                ],
-
-            });
-        });
-    </script>
+    @stack('scripts')
 </body>
 
 </html>

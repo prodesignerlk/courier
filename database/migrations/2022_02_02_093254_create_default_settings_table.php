@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSmsOptionsTable extends Migration
+class CreateDefaultSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateSmsOptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sms_options', function (Blueprint $table) {
-            $table->id('sms_option_id');
-
-            //details
-            $table->string('option')->unique();
-            $table->text('description')->nullable();
+        Schema::create('default_settings', function (Blueprint $table) {
+            $table->id('default_setting_id');
             
-            //api
-            $table->string('api_key')->nullable();
-            $table->string('api_secret')->nullable();
+            //default price rates
+            $table->float('regular_price')->nullable();
+            $table->float('extra_price')->nullable();
+            $table->float('handeling_fee')->nullable();
+
+            //waybill start from
+            $table->integer('waybill_start_from')->nullable();
 
             $table->unsignedBigInteger('org_id');
             $table->foreign('org_id')->references('org_id')->on('organizations');
@@ -38,6 +38,6 @@ class CreateSmsOptionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sms_options');
+        Schema::dropIfExists('default_settings');
     }
 }
