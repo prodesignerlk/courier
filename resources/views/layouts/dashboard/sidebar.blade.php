@@ -111,16 +111,16 @@
                     <span class="link-title">Fails</span>
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="/student/class/find-classes" class="nav-link">Mis-Routs</a>
+                            <a href="/fail/mis-route" class="nav-link">Mis-Routs</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/student/class/my-classes" class="nav-link">Re-route</a>
+                            <a href="/fail/re-route" class="nav-link">Re-route</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/student/class/my-classes" class="nav-link">Received by HO</a>
+                            <a href="/fail/received-ho" class="nav-link">Received by HO</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/student/class/my-classes" class="nav-link">Return to Client </a>
+                            <a href="/fail/return" class="nav-link">Return to Client </a>
                         </li>
                     </ul>
                 </div>

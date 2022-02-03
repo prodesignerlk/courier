@@ -95,3 +95,21 @@ Route::get('/hand/reshedule', function () {
 Route::get('/hand/fails', function () {
     return view('/process/hand-fails');
 });
+
+// Fails 
+// mis-route
+Route::get('/fail/mis-route', function () {
+    return view('/process/fail-mis-route');
+});
+// re-route
+Route::get('/fail/re-route', function () {
+    return view('/process/fail-re-route');
+});
+// HO (Returns) 
+Route::get('/fail/received-ho', function () {
+    return view('/process/fail-received-ho');
+});
+// Return to Client 
+Route::get('/fail/return', function () {
+    return view('/process/fail-return');
+});
