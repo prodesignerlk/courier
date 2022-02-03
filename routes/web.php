@@ -78,3 +78,20 @@ Route::get('/dis/received', function () {
     return view('/process/dis-received');
 });
 
+// handover
+// Assign To Agent
+Route::get('/hand/assign-to-agent', function () {
+    return view('/process/hand-assign-to-agent');
+});
+// deliverd order
+Route::get('/hand/deliverd', function () {
+    return view('/process/hand-deliverd');
+});
+// reschedule
+Route::get('/hand/reshedule', function () {
+    return view('/process/hand-reshedule');
+});
+// deliver fails
+Route::get('/hand/fails', function () {
+    return view('/process/hand-fails');
+});

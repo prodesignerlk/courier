@@ -96,16 +96,16 @@
                     <span class="link-title">Handover</span>
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="/student/class/find-classes" class="nav-link">Assign to Agent</a>
+                            <a href="/hand/assign-to-agent" class="nav-link">Assign to Agent</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/student/class/my-classes" class="nav-link">Dilivered</a>
+                            <a href="/hand/deliverd" class="nav-link">Delivered</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/student/class/my-classes" class="nav-link">Re-Schedule</a>
+                            <a href="/hand/reshedule" class="nav-link">Re-Schedule</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/student/class/my-classes" class="nav-link">Deliver Fails </a>
+                            <a href="/hand/fails" class="nav-link">Deliver Fails </a>
                         </li>
                     </ul>
                     <span class="link-title">Fails</span>
