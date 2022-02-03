@@ -45,7 +45,9 @@ Route::get('/default-settings', function () {return view('/settings/default-sett
 Route::post('/waybill-type-add', [SettingController::class, 'waybill_type_input'])->name('waybill_type_input');
 
 // Process Operation
+
 // pickups
+// pending
 Route::get('/pickup/pending', function () {
     return view('/process/pick-pending');
 });
@@ -57,3 +59,22 @@ Route::get('/pickup/collected', function () {
 Route::get('/pickup/dispatched', function () {
     return view('/process/pick-dispatch');
 });
+
+//distribute
+// collect
+Route::get('/dis/collect', function () {
+    return view('/process/dis-collect');
+});
+// dispatch
+Route::get('/dis/dispatch', function () {
+    return view('/process/dis-dispatch');
+});
+// To be Receive Packages 
+Route::get('/dis/to-be-receive', function () {
+    return view('/process/dis-to-be-receive');
+});
+// Received Packages 
+Route::get('/dis/received', function () {
+    return view('/process/dis-received');
+});
+

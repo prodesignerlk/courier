@@ -81,16 +81,16 @@
                     <span class="link-title">Distribute</span>
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="/student/class/find-classes" class="nav-link">Collect Processing Orders</a>
+                            <a href="/dis/collect" class="nav-link">Collect Processing Orders</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/student/class/my-classes" class="nav-link">Dispatch Collected Orders</a>
+                            <a href="/dis/dispatch" class="nav-link">Dispatch Collected Orders</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/student/class/my-classes" class="nav-link">To Be Receive Packages</a>
+                            <a href="/dis/to-be-receive" class="nav-link">To Be Receive Packages</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/student/class/my-classes" class="nav-link">Receive Orders</a>
+                            <a href="/dis/received" class="nav-link">Receive Orders</a>
                         </li>
                     </ul>
                     <span class="link-title">Handover</span>

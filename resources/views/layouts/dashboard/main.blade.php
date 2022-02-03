@@ -38,7 +38,8 @@
                 <div class="navbar-content">
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown nav-notifications">
-                            <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i data-feather="bell"></i>
                                 <div class="indicator">
                                     <div class="circle"></div>
@@ -102,7 +103,8 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown nav-profile">
-                            <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img src="https://via.placeholder.com/30x30" alt="profile">
                             </a>
                             <div class="dropdown-menu" aria-labelledby="profileDropdown">
@@ -136,13 +138,15 @@
                     </ul>
                 </div>
             </nav>
+
             <div class="page-content">
                 @yield('content')
-                
             </div>
             <footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between">
-                <p class="text-muted text-center text-md-left">Copyright © 2021 <a href="https://www.prodesigner.lk" target="_blank">PRODESIGNER.LK (PVT) LTD</a>. All rights reserved</p>
-                {{-- <p class="text-muted text-center text-md-left mb-0 d-none d-md-block">Handcrafted With <i class="mb-1 text-primary ml-1 icon-small" data-feather="heart"></i> of Laravel</p> --}}
+                <p class="text-muted text-center text-md-left">Copyright © 2021 <a href="https://www.prodesigner.lk"
+                        target="_blank">PRODESIGNER.LK (PVT) LTD</a>. All rights reserved</p>
+                {{-- <p class="text-muted text-center text-md-left mb-0 d-none d-md-block">Handcrafted With <i
+                        class="mb-1 text-primary ml-1 icon-small" data-feather="heart"></i> of Laravel</p> --}}
                 <p class="text-muted text-center text-md-left mb-0 d-none d-md-block">v{{ env('APP_VERSION') }}</p>
             </footer>
         </div>
