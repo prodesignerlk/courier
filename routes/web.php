@@ -43,3 +43,17 @@ Route::get('/default-settings', function () {return view('/settings/default-sett
 
 //Waybill Type Insert
 Route::post('/waybill-type-add', [SettingController::class, 'waybill_type_input'])->name('waybill_type_input');
+
+// Process Operation
+// pickups
+Route::get('/pickup/pending', function () {
+    return view('/process/pick-pending');
+});
+// collect
+Route::get('/pickup/collected', function () {
+    return view('/process/pick-collect');
+});
+// Dispatched
+Route::get('/pickup/dispatched', function () {
+    return view('/process/pick-dispatch');
+});

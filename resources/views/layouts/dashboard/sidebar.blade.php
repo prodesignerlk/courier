@@ -59,6 +59,73 @@
                 </div>
             </li>
             <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#stuClasses" role="button" aria-expanded="false"
+                    aria-controls="emails">
+                    <i class="link-icon" data-feather="box"></i>
+                    <span class="link-title">Process Operation</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" id="stuClasses">
+                    <span class="link-title">Pickup</span>
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="/pickup/pending" class="nav-link">Pending</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/pickup/collected" class="nav-link">Collected</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/pickup/dispatched" class="nav-link">Dispatched</a>
+                        </li>
+                    </ul>
+                    <span class="link-title">Distribute</span>
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="/student/class/find-classes" class="nav-link">Collect Processing Orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/student/class/my-classes" class="nav-link">Dispatch Collected Orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/student/class/my-classes" class="nav-link">To Be Receive Packages</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/student/class/my-classes" class="nav-link">Receive Orders</a>
+                        </li>
+                    </ul>
+                    <span class="link-title">Handover</span>
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="/student/class/find-classes" class="nav-link">Assign to Agent</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/student/class/my-classes" class="nav-link">Dilivered</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/student/class/my-classes" class="nav-link">Re-Schedule</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/student/class/my-classes" class="nav-link">Deliver Fails </a>
+                        </li>
+                    </ul>
+                    <span class="link-title">Fails</span>
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="/student/class/find-classes" class="nav-link">Mis-Routs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/student/class/my-classes" class="nav-link">Re-route</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/student/class/my-classes" class="nav-link">Received by HO</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/student/class/my-classes" class="nav-link">Return to Client </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="#settings" role="button" aria-expanded="false" aria-controls="emails">
                     <i class="link-icon" data-feather="mail"></i>
                     <span class="link-title">Settings</span>
