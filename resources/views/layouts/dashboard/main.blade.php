@@ -140,9 +140,9 @@
                     </ul>
                 </div>
             </nav>
+
             <div class="page-content">
                 @yield('content')
-
             </div>
             <footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between">
                 <p class="text-muted text-center text-md-left">Copyright © 2021 <a href="https://www.prodesigner.lk"

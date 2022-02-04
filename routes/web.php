@@ -45,3 +45,73 @@ Route::get('/default-settings', function () {return view('/settings/default-sett
 Route::post('/waybill-type-add', [SettingController::class, 'waybill_type_input'])->name('waybill_type_input');
 Route::post('/waybill-type-get', [SettingController::class, 'getWaybillTypes'])->name('getWaybillTypes');
 Route::get('/fill-waybill-type-table', [SettingController::class, 'fill_waybill_type_table'])->name('fill_waybill_type_table');
+
+// Process Operation
+
+// pickups
+// pending
+Route::get('/pickup/pending', function () {
+    return view('/process/pick-pending');
+});
+// collect
+Route::get('/pickup/collected', function () {
+    return view('/process/pick-collect');
+});
+// Dispatched
+Route::get('/pickup/dispatched', function () {
+    return view('/process/pick-dispatch');
+});
+
+//distribute
+// collect
+Route::get('/dis/collect', function () {
+    return view('/process/dis-collect');
+});
+// dispatch
+Route::get('/dis/dispatch', function () {
+    return view('/process/dis-dispatch');
+});
+// To be Receive Packages 
+Route::get('/dis/to-be-receive', function () {
+    return view('/process/dis-to-be-receive');
+});
+// Received Packages 
+Route::get('/dis/received', function () {
+    return view('/process/dis-received');
+});
+
+// handover
+// Assign To Agent
+Route::get('/hand/assign-to-agent', function () {
+    return view('/process/hand-assign-to-agent');
+});
+// deliverd order
+Route::get('/hand/deliverd', function () {
+    return view('/process/hand-deliverd');
+});
+// reschedule
+Route::get('/hand/reshedule', function () {
+    return view('/process/hand-reshedule');
+});
+// deliver fails
+Route::get('/hand/fails', function () {
+    return view('/process/hand-fails');
+});
+
+// Fails 
+// mis-route
+Route::get('/fail/mis-route', function () {
+    return view('/process/fail-mis-route');
+});
+// re-route
+Route::get('/fail/re-route', function () {
+    return view('/process/fail-re-route');
+});
+// HO (Returns) 
+Route::get('/fail/received-ho', function () {
+    return view('/process/fail-received-ho');
+});
+// Return to Client 
+Route::get('/fail/return', function () {
+    return view('/process/fail-return');
+});
