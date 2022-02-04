@@ -5,7 +5,7 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header bg-primary text-white">
-                    <p>Waybill Type</p>
+                    <p>Add Waybill Type</p>
                 </div>
                 <div class="card-body">
                     <div class="form-row">
@@ -32,18 +32,15 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header bg-primary text-white">
-                    <p>Reservation Type</p>
+                    <p>System Reservation Type</p>
                 </div>
                 <div class="card-body">
                     <form action="">
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="">Select Type :</label>
-                                <select name="" id="" class="form-control js-example-basic-single">
+                                <select name="" id="waybill_type_selector" class="form-control js-example-basic-single">
                                     <option value="" disabled selected>Select...</option>
-                                    <option value="">Auto Increment</option>
-                                    <option value="">Quentity</option>
-                                    <option value="">Range</option>
                                 </select>
                             </div>
                         </div>
@@ -94,40 +91,16 @@
                 </div>
                 <div class="card-body">
                     <div class="table-resposnive">
-                        <table class="table table-bordered" id="datatable-basic">
+                        <table class="table table-bordered" id="waybill-type-table">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
+                                    <th scope="col">id</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Description</th>
-                                    <th scope="col" colspan="2">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>COD</td>
-                                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                                    <td><a href="#" class="badge badge-primary">Edit</a></td>
-                                    <td><a href="#" class="badge badge-danger">Delete</a></td>
 
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>COD</td>
-                                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                                    <td><a href="#" class="badge badge-primary">Edit</a></td>
-                                    <td><a href="#" class="badge badge-danger">Delete</a></td>
-
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>COD</td>
-                                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                                    <td><a href="#" class="badge badge-primary">Edit</a></td>
-                                    <td><a href="#" class="badge badge-danger">Delete</a></td>
-
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -138,30 +111,102 @@
 
     <script>
         $('document').ready(function() {
+            getWaybillType();
+
             $('#btn-add-type').click(function() {
-                alert(1);
-                let type_name = $('#type_name').val();
-                let type_description = $('#type_description').val();
-
-                $.ajax({
-                    url: "{{ route('waybill_type_input') }}",
-                    method:'POST',
-                    data: {
-                        type_name: type_name,
-                        type_description: type_description,
-                        _token: "{{ csrf_token() }}",
-                    },
-                    
-                    success: function(data) {
-                        console.log(data);
-
-                    },
-                    error: function(error) {
-                        console.log(error);
-                    }
-                });
-                
+                inputWaybillType();
             });
         });
+
+        function inputWaybillType() {
+            let type_name = $('#type_name').val();
+            let type_description = $('#type_description').val();
+
+            $.ajax({
+                url: "{{ route('waybill_type_input') }}",
+                method: 'POST',
+                data: {
+                    type_name: type_name,
+                    type_description: type_description,
+                    _token: "{{ csrf_token() }}",
+                },
+                beforeSend: function() {
+                    $('#btn-add-type').html('<i class="fa fa-spinner fa-spin"></i> loading...');
+                },
+                success: function(data) {
+                    // console.log(data);
+                    $('#type_name').val('');
+                    $('#type_description').val('');
+                    $('#btn-add-type').html('Save');
+                    notify('success', 'Data insert Successful.');
+                    getWaybillType();
+                },
+                error: function(error) {
+                    // console.log(error);
+                    $('#btn-add-type').html('Try Again');
+                    notify('error', 'Data insert failed.');
+                }
+            });
+        }
+
+        function getWaybillType() {
+            var option = "";
+            // var tbody="";
+
+            $.ajax({
+                url: '{{ route('getWaybillTypes') }}',
+                method: 'post',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                },
+                dataType: 'json',
+                success: function(data) {
+                    $.each(data, function(i, value) {
+                        option += "<option value=" + value.waybill_type_id + ">" + value.type +
+                            "</option>";
+                        // tbody += "<tr><td>"+value.waybill_type_id+"</td><td>"+value.type+"</td><td>"+value.description+"</td></tr>"
+                    });
+                    $('#waybill_type_selector').html("<option value='null' selected desabled>Select...</option>");
+
+                    $('#waybill_type_selector').append(option);
+                    
+                    
+                    // $('#datatable-basic tbody').html("");
+                    // $('#datatable-basic tbody').append(tbody);
+
+                },
+                error: function(error) {
+                    // console.log(error);
+                    notify('error', 'Data showing failed.');
+                }
+            });
+        }
     </script>
 @endsection
+@push('scripts')
+    <script>
+        $(function() {
+            $('#waybill-type-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('fill_waybill_type_table') }}",
+
+                columns: [{
+                        data: 'waybill_type_id',
+                        name: 'waybill_type_id'
+                    },
+                    {
+                        data: 'type',
+                        name: 'type'
+                    },
+                    {
+                        data: 'description',
+                        name: 'description'
+                    },
+                ]
+            });
+
+        });
+    </script>
+
+@endpush

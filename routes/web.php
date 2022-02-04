@@ -43,3 +43,5 @@ Route::get('/default-settings', function () {return view('/settings/default-sett
 
 //Waybill Type Insert
 Route::post('/waybill-type-add', [SettingController::class, 'waybill_type_input'])->name('waybill_type_input');
+Route::post('/waybill-type-get', [SettingController::class, 'getWaybillTypes'])->name('getWaybillTypes');
+Route::get('/fill-waybill-type-table', [SettingController::class, 'fill_waybill_type_table'])->name('fill_waybill_type_table');
