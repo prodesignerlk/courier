@@ -27,6 +27,17 @@
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="{{ url('assets/images/favicon.png') }}" />
 
+    <!--Link the jquery ui file-->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+    <!--Link the jquery ui file-->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <style>
+  #selectable .ui-selected { background: #018BFF; color: white; }
+    </style>
+
 </head>
 
 <body>

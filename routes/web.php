@@ -132,3 +132,8 @@ Route::get('/fail/received-ho', function () {
 Route::get('/fail/return', function () {
     return view('/process/fail-return');
 });
+
+// Return to Client 
+Route::get('/client-registration', function () {
+    return view('/client-reg');
+});
