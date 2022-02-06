@@ -1,6 +1,7 @@
 label.error {
-    font-weight: 700;
+    font-weight: 500;
     display: block;
     color: #f00;
-    font-size: 14px;
+    font-size: 10px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

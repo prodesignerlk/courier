@@ -12,7 +12,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="">Waybill Type :</label>
-                                <select name="waybill_type" id="waybill_type" class="form-control js-example-basic-single" required>
+                                <select name="waybill_type" id="waybill_type" class="form-control js-example-basic-single @error('waybill_type') is-invalid @enderror" required>
                                     <option value="" disabled selected>Select...</option>
                                 </select>
                             </div>
@@ -24,7 +24,7 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="">Reserve from :</label>
-                                <input type="number" name="reserve_from" id="reserve_from" class="form-control" required>
+                                <input type="number" name="reserve_from" id="reserve_from" class="form-control @error('reserve_from') is-invalid @enderror" required>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="">Reserve to :</label>
@@ -160,7 +160,7 @@
                     reserve_to: "required",
                 },
                 messages: {
-                    reserve_from: "Please specify your name",
+                    
                 }
             });
         }
