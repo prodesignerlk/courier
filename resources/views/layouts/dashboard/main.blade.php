@@ -26,6 +26,7 @@
     <script src="{{ url('assets/vendors/core/core.js') }}"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="{{ url('assets/images/favicon.png') }}" />
+    <link rel="stylesheet" href="{{ url('assets/css/validation/validation.css') }}">
 
 </head>
 
@@ -192,6 +193,7 @@
     <script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"></script>
     <script src="sweetalert2.all.min.js"></script>
+    
     @stack('scripts')
 </body>
 <script>

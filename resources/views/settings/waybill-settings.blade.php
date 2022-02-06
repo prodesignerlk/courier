@@ -163,7 +163,7 @@
             var tbody = "";
 
             $.ajax({
-                url: '{{ route('getWaybillTypes') }}',
+                url: '{{ route('get_waybill_types') }}',
                 method: 'post',
                 data: {
                     _token: "{{ csrf_token() }}",

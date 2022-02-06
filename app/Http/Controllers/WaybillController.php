@@ -26,4 +26,13 @@ class WaybillController extends Controller
 
         return view('order-management.waybill-reservation');
     }
+
+    public function waybill_reservation_post(Request $request)
+    {
+        /** @var User $user */
+        $user = Auth::user();
+        $permission = $user->can('waybill_reservation.create');
+
+        if(!$permission){abort(403);}
+    }
 }
