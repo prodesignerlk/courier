@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="{{ url('assets/images/favicon.png') }}" />
     <link rel="stylesheet" href="{{ url('assets/css/validation/validation.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/css/main.css') }}">
 
     <!--Link the jquery ui file-->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
