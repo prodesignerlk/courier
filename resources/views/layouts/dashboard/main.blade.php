@@ -202,6 +202,7 @@
     <script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"></script>
     <script src="sweetalert2.all.min.js"></script>
     
+    
     @stack('scripts')
 </body>
 <script>
