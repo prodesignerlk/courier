@@ -56,24 +56,24 @@
                         <div class="form-group col-md-3 col-sm-6 ">
                             <div class="card ui-widget-content bg-transparent border border-primary">
                                 <div class="card-body">
-                                    <h4>After 3 days</h4>
-                                    <h6><span class="badge badge-primary pl-3 pr-3 border border-light">(+3%)</span></h6>
+                                    <h4>After 7 days</h4>
+                                    <h6><span class="badge badge-primary pl-3 pr-3 border border-light">(+1%)</span></h6>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group col-md-3 col-sm-6 ">
                             <div class="card ui-widget-content bg-transparent border border-primary">
                                 <div class="card-body">
-                                    <h4>After 3 days</h4>
-                                    <h6><span class="badge badge-primary pl-3 pr-3 border border-light">(+3%)</span></h6>
+                                    <h4>After 15 days</h4>
+                                    <h6><span class="badge badge-primary pl-3 pr-3 border border-light">(+0%)</span></h6>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group col-md-3 col-sm-6 ">
                             <div class="card ui-widget-content bg-transparent border border-primary">
                                 <div class="card-body">
-                                    <h4>After 3 days</h4>
-                                    <h6><span class="badge badge-primary pl-3 pr-3 border border-light">(+3%)</span></h6>
+                                    <h4>After 30 days</h4>
+                                    <h6><span class="badge badge-primary pl-3 pr-3 border border-light">(+0%)</span></h6>
                                 </div>
                             </div>
                         </div>
