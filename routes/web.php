@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SellerController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\WaybillController;
 use Illuminate\Support\Facades\Auth;
@@ -22,15 +23,34 @@ Auth::routes();
 //dashboard
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-//Settings
+//Settings =================================================================================================================================
+
+//sms settings
 Route::view('/sms-settings','settings.sms')->name('sms-settings');
 
-//Order Mgt
-Route::get('/waybill-reservation', [WaybillController::class, 'waybill_reservation_get'])->name('waybill-reservation');
+//Waybill setting
+Route::get('/waybill-settings', [SettingController::class, 'waybill_setting_get'])->name('waybill_setting_get');
+
+Route::post('/waybill-description', [SettingController::class, 'waybill_description_get'])->name('waybill_description_get');
+Route::post('/waybill-type-add', [SettingController::class, 'waybill_type_input'])->name('waybill_type_input');
+Route::post('/waybill-type-get', [SettingController::class, 'get_waybill_types'])->name('get_waybill_types');
+
+Route::get('/fill-waybill-type-table', [SettingController::class, 'fill_waybill_type_table'])->name('fill_waybill_type_table');
+Route::post('/set-waybill-type', [SettingController::class, 'set_waybill_type'])->name('set_waybill_type');
+// =========================================================================================================================================
+
+//Order Mgt ================================================================================================================================
+Route::get('/waybill-reservation', [WaybillController::class, 'waybill_reservation_get'])->name('wayb');
+Route::post('/waybill-reservation', [WaybillController::class, 'waybill_reservation_post'])->name('waybill_reservation_post');
 
 Route::view('/create-order','admin.order-management.create-order')->name('create-order');
 Route::view('/my-orders','admin.order-management.my-orders')->name('my-orders');
 Route::view('/barcode-print','admin.order-management.barcode-print')->name('barcode-print');
+
+// ==========================================================================================================================================
+
+//Seller=====================================================================================================================================
+Route::post('/ajax/get-sellers-details', [SellerController::class, 'get_seller_details'])->name('get_seller_details');
 
 //logout
 Route::get('/logout', function() {Auth::logout(); return redirect('/login');});
@@ -38,13 +58,10 @@ Route::get('/logout', function() {Auth::logout(); return redirect('/login');});
 Route::get('/getuser', [HomeController::class, 'getuser'])->name('getuser');
 
 Route::get('/general-settings', function () {return view('/settings/general');})->name('general-settings');
-Route::get('/waybill-settings', function () {return view('/settings/waybill-settings');})->name('waybill-settings');
 Route::get('/default-settings', function () {return view('/settings/default-settings');})->name('default-settings');
 
-//Waybill Type Insert
-Route::post('/waybill-type-add', [SettingController::class, 'waybill_type_input'])->name('waybill_type_input');
-Route::post('/waybill-type-get', [SettingController::class, 'getWaybillTypes'])->name('getWaybillTypes');
-Route::get('/fill-waybill-type-table', [SettingController::class, 'fill_waybill_type_table'])->name('fill_waybill_type_table');
+
+
 
 // Process Operation
 

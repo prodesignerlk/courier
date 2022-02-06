@@ -20,7 +20,7 @@ class RoleSeeder extends Seeder
         $user_role = [
             'Super Admin',
             'User',
-            'Client',
+            'Seller',
         ];
         foreach($user_role as $role){
             Role::create(['name' => $role]);

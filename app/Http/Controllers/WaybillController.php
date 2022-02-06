@@ -18,15 +18,12 @@ class WaybillController extends Controller
     {
         /** @var User $user */
         $user = Auth::user();
-        $permission = $user->can('waybill-reservation.view');
-        
+        $permission = $user->can('waybill_reservation.view') || $user->can('waybill_reservation.create');
+
         if(!$permission){
-            Auth::logout();
             abort(403);
         }
 
         return view('order-management.waybill-reservation');
-
-
     }
 }

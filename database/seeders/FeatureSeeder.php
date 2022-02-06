@@ -15,9 +15,9 @@ class FeatureSeeder extends Seeder
     {
         $features = [
             //waybill feature
-            'waybill_option1' => ['model' => 'WaybillOption', 'option' => 'Auto_increment', 'description' => 'Automatically increase waybill one by one. There is not a Waybill reservation section', 'org' => '1'],
-            'waybill_option2' => ['model' => 'WaybillOption', 'option' => 'Manual_range', 'description' => 'User have to have defind waybill ranges.', 'org' => '1'],
-            'waybill_option3' => ['model' => 'WaybillOption', 'option' => 'Manual_qnt', 'description' => 'User have to have defind waybill quantity.', 'org' => '1'],
+            'waybill_option1' => ['model' => 'WaybillOption', 'option' => 'Auto Increment', 'description' => 'Automatically increase waybill one by one. There is not a Waybill reservation section', 'org' => '1'],
+            'waybill_option2' => ['model' => 'WaybillOption', 'option' => 'Manual Range', 'description' => 'User have to have defind waybill ranges.', 'org' => '1'],
+            'waybill_option3' => ['model' => 'WaybillOption', 'option' => 'Manual Qnt', 'description' => 'User have to have defind waybill quantity.', 'org' => '1'],
 
             //sms feature
             'SmsOption1' => ['model' => 'SmsOption', 'option' => 'Lankabell', 'description' => 'Lankabell sms gateway.', 'org' => '1'],

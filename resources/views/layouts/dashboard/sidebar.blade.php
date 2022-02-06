@@ -34,15 +34,16 @@
                             if(Auth::check()){
                                 $org = Auth::user()->org_id;
                                 $waybill_option = App\Models\Setting::where([['org_id', $org], ['feature', 'waybill_option']])->first()->waybill_option;
+                                // dd($waybill_option);
                             }else{
                                 $waybill_option = null;
                             }
                 
                         @endphp
-                        @if ($waybill_option != null && ($waybill_option->option == 'Manual_range' || $waybill_option->option == 'Manual_qnt'))
+                        @if ($waybill_option != null && ($waybill_option->option == 'Manual Range' || $waybill_option->option == 'Manual Qnt'))
                             @can('waybill-reservation.view')
                                 <li class="nav-item">
-                                    <a href="{{route('waybill-reservation')}}" class="nav-link">Waybill Reservation</a>
+                                    <a href="{{route('waybill_reservation_post')}}" class="nav-link">Waybill Reservation</a>
                                 </li>
                             @endcan
                         @endif
@@ -140,7 +141,7 @@
                             <a href="{{route('general-settings')}}" class="nav-link">General Settings</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('waybill-settings')}}" class="nav-link">Waybill Settings</a>
+                            <a href="{{route('waybill_setting_get')}}" class="nav-link">Waybill Settings</a>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('default-settings')}}" class="nav-link">Default Settings</a>
