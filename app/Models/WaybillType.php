@@ -16,6 +16,5 @@ class WaybillType extends Model
     protected $fillable = [
         'type',
         'description',
-        'org_id'
     ];
 }

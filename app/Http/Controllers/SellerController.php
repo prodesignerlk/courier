@@ -13,7 +13,7 @@ class SellerController extends Controller
         $this->middleware(['auth']);
     }
 
-    public function get_seller_details()
+    public function get_all_seller_details()
     {
         /** @var User $user */
         $user = Auth::user();

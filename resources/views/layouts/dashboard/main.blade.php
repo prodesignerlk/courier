@@ -28,6 +28,7 @@
     <link rel="shortcut icon" href="{{ url('assets/images/favicon.png') }}" />
     <link rel="stylesheet" href="{{ url('assets/css/validation/validation.css') }}">
     <link rel="stylesheet" href="{{ url('assets/css/main.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/css/custom-color/custom-color.css') }}">
 
     <!--Link the jquery ui file-->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
@@ -152,7 +153,10 @@
             </nav>
 
             <div class="page-content">
+                @include('layouts.msg.msg-layout')
                 @yield('content')
+                @include('sweetalert::alert')
+
             </div>
             <footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between">
                 <p class="text-muted text-center text-md-left">Copyright © 2021 <a href="https://www.prodesigner.lk"
@@ -201,12 +205,31 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"></script>
-    <script src="sweetalert2.all.min.js"></script>
-    
-    
+    {{-- <script src="sweetalert2.all.min.js"></script> --}}
+    <script src="{{ url('assets/js/validation/form-validateion.js') }}"></script>
+
+
     @stack('scripts')
 </body>
 <script>
+    $('#regular-table').DataTable({
+        "bSortClasses": false,
+
+        dom: 'Bfrtip',
+        lengthMenu: [
+            [10, 50, 100, 500, 1000, 5000, -1],
+            ['10 rows', '50 rows', '100 rows', '500 rows', '1000 rows', '5000 rows', 'Show all']
+        ],
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print', 'pageLength'
+        ],
+        order: [
+            [
+                0, "desc"
+            ]
+        ],
+    });
+
     function notify(type, msg) {
         Swal.fire({
             toast: true,

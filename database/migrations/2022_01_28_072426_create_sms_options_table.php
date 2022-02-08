@@ -24,9 +24,6 @@ class CreateSmsOptionsTable extends Migration
             $table->string('api_key')->nullable();
             $table->string('api_secret')->nullable();
 
-            $table->unsignedBigInteger('org_id');
-            $table->foreign('org_id')->references('org_id')->on('organizations');
-
             $table->timestamps();
         });
     }

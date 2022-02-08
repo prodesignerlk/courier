@@ -21,6 +21,7 @@ class CreatePackagesTable extends Migration
             $table->float('package_weight')->nullable();
             $table->boolean('package_used_status')->default(0);
             $table->integer('batch_number');
+            $table->dateTime('reserved_date');
             
             $table->unsignedBigInteger('seller_id');
             $table->foreign('seller_id')->references('seller_id')->on('sellers');

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\OrderStatus;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,12 +17,15 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         $this->call([
-            OrgSeeder::class,
-            UserSeeder::class,
+            DistrictSeeder::class,
+            CitySeeder::class,
             PermissionSeeder::class,
             RoleSeeder::class,
+            UserSeeder::class,
             SettingSeeder::class,
             FeatureSeeder::class,
+            BranchSeeder::class,
+            OrderStatusSeeder::class,
         ]);
     }
 }

@@ -15,15 +15,14 @@ class SettingSeeder extends Seeder
     public function run()
     {
         $settings = [
-            'waybill_option' => ['feature' => 'waybill_option', 'relevent_model' => 'WaybillOption', 'org_id' => 1],
-            'sms_option' => ['feature' => 'sms_option', 'relevent_model' => 'SmsOption', 'org_id' => 1]
+            'waybill_option' => ['feature' => 'waybill_option', 'relevent_model' => 'WaybillOption'],
+            'sms_option' => ['feature' => 'sms_option', 'relevent_model' => 'SmsOption']
         ];
 
         foreach($settings as $setting){
             Setting::create([
                 'feature' => $setting['feature'],
                 'relevent_model' => $setting['relevent_model'],
-                'org_id' => $setting['org_id']
             ]);
         }
     }

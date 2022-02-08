@@ -19,7 +19,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse" href="#odr_mng" role="button" aria-expanded="false" aria-controls="emails" id="req-ex">
+                <a class="nav-link" data-toggle="collapse" href="#odr_mng" role="button" aria-expanded="false"
+                    aria-controls="emails" id="req-ex">
                     <i class="link-icon" data-feather="mail"></i>
                     <span class="link-title">Order Management</span> &nbsp;
                     <div class="spinner-grow spinner-grow-sm text-white invisible pending-header-req" role="status">
@@ -31,30 +32,30 @@
                     <ul class="nav sub-menu">
                         @php
                             //Waybill reservation feature check
-                            if(Auth::check()){
-                                $org = Auth::user()->org_id;
-                                $waybill_option = App\Models\Setting::where([['org_id', $org], ['feature', 'waybill_option']])->first()->waybill_option;
-                                // dd($waybill_option);
+                            $waybill_option = App\Models\Setting::where([['feature', 'waybill_option']]);
+                            if($waybill_option != null){
+                                $waybill_option = $waybill_option->first()->waybill_option;
                             }else{
-                                $waybill_option = null;
+                                $waybill_option = 'null';
                             }
-                
+                            
                         @endphp
                         @if ($waybill_option != null && ($waybill_option->option == 'Manual Range' || $waybill_option->option == 'Manual Qnt'))
                             @can('waybill-reservation.view')
                                 <li class="nav-item">
-                                    <a href="{{route('waybill_reservation_post')}}" class="nav-link">Waybill Reservation</a>
+                                    <a href="{{ route('waybill_reservation_post') }}" class="nav-link">Waybill
+                                        Reservation</a>
                                 </li>
                             @endcan
                         @endif
                         <li class="nav-item">
-                            <a href="{{route('create-order')}}" class="nav-link">Create Order</a>
+                            <a href="{{ route('create_order_get') }}" class="nav-link">Create Order</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('my-orders')}}" class="nav-link">My Orders</a>
+                            <a href="{{ route('my-orders') }}" class="nav-link">My Orders</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('barcode-print')}}" class="nav-link">Barcode Print</a>
+                            <a href="{{ route('barcode-print') }}" class="nav-link">Barcode Print</a>
                         </li>
                     </ul>
                 </div>
@@ -127,7 +128,8 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse" href="#settings" role="button" aria-expanded="false" aria-controls="emails">
+                <a class="nav-link" data-toggle="collapse" href="#settings" role="button" aria-expanded="false"
+                    aria-controls="emails">
                     <i class="link-icon" data-feather="mail"></i>
                     <span class="link-title">Settings</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
@@ -135,16 +137,16 @@
                 <div class="collapse" id="settings">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="{{route('sms-settings')}}" class="nav-link">SMS Settings</a>
+                            <a href="{{ route('sms-settings') }}" class="nav-link">SMS Settings</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('general-settings')}}" class="nav-link">General Settings</a>
+                            <a href="{{ route('general-settings') }}" class="nav-link">General Settings</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('waybill_setting_get')}}" class="nav-link">Waybill Settings</a>
+                            <a href="{{ route('waybill_setting_get') }}" class="nav-link">Waybill Settings</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('default-settings')}}" class="nav-link">Default Settings</a>
+                            <a href="{{ route('default-settings') }}" class="nav-link">Default Settings</a>
                         </li>
                     </ul>
                 </div>

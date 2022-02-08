@@ -33,7 +33,6 @@ class SettingController extends Controller
         $data_save = WaybillType::create([
             'type' => $type_name,
             'description' => $type_description,
-            'org_id' => $user->org_id,
         ]);
 
         return response()->json($data_save);

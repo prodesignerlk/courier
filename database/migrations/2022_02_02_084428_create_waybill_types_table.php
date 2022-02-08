@@ -17,9 +17,6 @@ class CreateWaybillTypesTable extends Migration
             $table->id('waybill_type_id');
             $table->string('type');
             $table->text('description')->nullable();
-
-            $table->unsignedBigInteger('org_id');
-            $table->foreign('org_id')->references('org_id')->on('organizations');
             
             $table->timestamps();
         });

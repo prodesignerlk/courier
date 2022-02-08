@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\DistrictCityController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\WaybillController;
@@ -40,17 +42,29 @@ Route::post('/set-waybill-type', [SettingController::class, 'set_waybill_type'])
 // =========================================================================================================================================
 
 //Order Mgt ================================================================================================================================
-Route::get('/waybill-reservation', [WaybillController::class, 'waybill_reservation_get'])->name('wayb');
+Route::get('/waybill-reservation', [WaybillController::class, 'waybill_reservation_get'])->name('waybill_reservation_get');
 Route::post('/waybill-reservation', [WaybillController::class, 'waybill_reservation_post'])->name('waybill_reservation_post');
 
-Route::view('/create-order','admin.order-management.create-order')->name('create-order');
-Route::view('/my-orders','admin.order-management.my-orders')->name('my-orders');
+Route::get('/create-order',[OrderController::class, 'create_order_get'])->name('create_order_get');
+Route::post('/create-order',[OrderController::class, 'create_order_post'])->name('create_order_post');
+
+Route::get('/my-orders',[OrderController::class, 'my_order_get'])->name('my-orders');
+Route::get('/data-table-my-orders',[OrderController::class, 'my_order_data_table'])->name('my_order_data_table');
+
 Route::view('/barcode-print','admin.order-management.barcode-print')->name('barcode-print');
 
 // ==========================================================================================================================================
 
-//Seller=====================================================================================================================================
-Route::post('/ajax/get-sellers-details', [SellerController::class, 'get_seller_details'])->name('get_seller_details');
+
+// Comman Ajax================================================================================================================================
+Route::post('/ajax/get-sellers-details', [SellerController::class, 'get_all_seller_details'])->name('get_seller_details');
+Route::post('/ajaz/get-package-details', [WaybillController::class, 'get_waybill_details'])->name('get_waybill_details');
+Route::post('/ajaz/get-district-city', [DistrictCityController::class, 'districts_city'])->name('districts_city');
+
+
+// ==========================================================================================================================================
+
+
 
 //logout
 Route::get('/logout', function() {Auth::logout(); return redirect('/login');});

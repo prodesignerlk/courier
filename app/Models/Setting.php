@@ -17,7 +17,6 @@ class Setting extends Model
         'feature',
         'option',
         'relevent_model',
-        'org_id'
     ];
 
     public function waybill_option()

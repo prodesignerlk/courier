@@ -25,11 +25,5 @@ class RoleSeeder extends Seeder
         foreach($user_role as $role){
             Role::create(['name' => $role]);
         }
-
-        $user = User::find(1);
-        $user->assignRole('Super Admin');
-
-        $user = User::find(1);
-        $user->assignRole('User');
     }
 }

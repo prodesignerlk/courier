@@ -24,9 +24,6 @@ class CreateDefaultSettingsTable extends Migration
             //waybill start from
             $table->integer('waybill_start_from')->nullable();
 
-            $table->unsignedBigInteger('org_id');
-            $table->foreign('org_id')->references('org_id')->on('organizations');
-
             $table->timestamps();
         });
     }

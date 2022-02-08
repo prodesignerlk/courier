@@ -19,12 +19,13 @@ class Package extends Model
         'package_weight',
         'package_used_status',
         'batch_number',
+        'reserved_date',
         'seller_id',
     ];
 
     public function seller()
     {
-        return $this->belongsTo(Seller::class);
+        return $this->belongsTo(Seller::class, 'seller_id');
     }
     
 }
