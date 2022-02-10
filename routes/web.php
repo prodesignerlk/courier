@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\StatusChangeController;
 use App\Http\Controllers\WaybillController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -39,7 +40,6 @@ Route::post('/waybill-type-get', [SettingController::class, 'get_waybill_types']
 
 Route::get('/fill-waybill-type-table', [SettingController::class, 'fill_waybill_type_table'])->name('fill_waybill_type_table');
 Route::post('/set-waybill-type', [SettingController::class, 'set_waybill_type'])->name('set_waybill_type');
-// =========================================================================================================================================
 
 //Order Mgt ================================================================================================================================
 Route::get('/waybill-reservation', [WaybillController::class, 'waybill_reservation_get'])->name('waybill_reservation_get');
@@ -51,18 +51,28 @@ Route::post('/create-order',[OrderController::class, 'create_order_post'])->name
 Route::get('/my-orders',[OrderController::class, 'my_order_get'])->name('my-orders');
 Route::get('/data-table-my-orders',[OrderController::class, 'my_order_data_table'])->name('my_order_data_table');
 
-Route::view('/barcode-print','admin.order-management.barcode-print')->name('barcode-print');
+Route::view('/barcode-print','order-management.barcode-print')->name('barcode-print');
 
-// ==========================================================================================================================================
+
+//Order Mgt ================================================================================================================================
+
+//pick-ups
+Route::get('/pick-up-pending-orders',[OrderController::class, 'pick_up_pending_orders_get'])->name('pick_up_pending_orders_get');
+Route::get('/data-table-pick-up-pending-orders',[OrderController::class, 'pick_up_pending_orders_data_table'])->name('pick_up_pending_orders_data_table');
+
+Route::get('/pick-up-collected',[OrderController::class, 'pick_up_collected_orders_get'])->name('pick_up_collected_orders_get');
+Route::get('/data-table-pick-up-collected-orders',[OrderController::class, 'pick_up_collected_orders_data_table'])->name('pick_up_collected_orders_data_table');
+Route::post('/pick-up-collected',[StatusChangeController::class, 'pickup_collected'])->name('pickup_collected');
+
+Route::get('/pick-up-dispatched',[OrderController::class, 'pick_up_dispatched_orders_get'])->name('pick_up_dispatched_orders_get');
+Route::get('/data-table-pick-up-dispatched_-orders',[OrderController::class, 'pick_up_dispatched_orders_data_table'])->name('pick_up_dispatched_orders_data_table');
+Route::post('/pick-up-dispatched',[StatusChangeController::class, 'pickup_dispatched'])->name('pickup_dispatched');
 
 
 // Comman Ajax================================================================================================================================
 Route::post('/ajax/get-sellers-details', [SellerController::class, 'get_all_seller_details'])->name('get_seller_details');
 Route::post('/ajaz/get-package-details', [WaybillController::class, 'get_waybill_details'])->name('get_waybill_details');
 Route::post('/ajaz/get-district-city', [DistrictCityController::class, 'districts_city'])->name('districts_city');
-
-
-// ==========================================================================================================================================
 
 
 
@@ -81,9 +91,7 @@ Route::get('/default-settings', function () {return view('/settings/default-sett
 
 // pickups
 // pending
-Route::get('/pickup/pending', function () {
-    return view('/process/pick-pending');
-});
+
 // collect
 Route::get('/pickup/collected', function () {
     return view('/process/pick-collect');

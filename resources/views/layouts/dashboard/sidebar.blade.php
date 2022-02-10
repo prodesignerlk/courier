@@ -71,13 +71,13 @@
                     <span class="link-title">Pickup</span>
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="/pickup/pending" class="nav-link">Pending</a>
+                            <a href="{{ route('pick_up_pending_orders_get') }}" class="nav-link">Pending</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/pickup/collected" class="nav-link">Collected</a>
+                            <a href="{{ route('pick_up_collected_orders_get') }}" class="nav-link">Collected</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/pickup/dispatched" class="nav-link">Dispatched</a>
+                            <a href="{{ route('pick_up_dispatched_orders_get') }}" class="nav-link">Dispatched</a>
                         </li>
                     </ul>
                     <span class="link-title">Distribute</span>

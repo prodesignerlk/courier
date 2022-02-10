@@ -1,110 +1,159 @@
 @extends('layouts.dashboard.main')
 
 @section('content')
-<div class="form-row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header bg-primary text-white">
-                <p>Filtering</p>
-            </div>
-            <div class="card-body">
-                <form action="" method="post">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="">From :</label>
-                            <input type="date" name="" id="" class="form-control">
+    @can('order.search')
+        <div class="form-row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <p>Filtering</p>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="">From :</label>
+                                <input type="date" name="date_from" id="date_from" class="form-control">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="">To :</label>
+                                <input type="date" name="date_to" id="date_to" class="form-control">
+                            </div>
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="">To :</label>
-                            <input type="date" name="" id="" class="form-control">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="">Status :</label>
+                                <select name="status[]" id="status" class="form-control js-example-basic-multiple" multiple>
+                                    @foreach ($status_details as $status)
+                                        <option value="{{ $status->order_status_id }}">{{ $status->status }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="">Branch :</label>
+                                <select name="branch_id" id="branch_id" class="form-control js-example-basic-single">
+                                    <option value="null" selected disabled>All Branches</option>
+                                    @foreach ($branch_details as $branch)
+                                        <option value="{{ $branch->branch_id }}">{{ $branch->branch_code }} -
+                                            {{ $branch->branch_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @if (!(Auth::user()->branch_staff))
+                                <div class="form-group col-md-3">
+                                    <label for="">Seller :</label>
+                                    <select name="seller_id" id="seller_id" class="form-control js-example-basic-single">
+                                        <option value="null" selected disabled>All Sellers</option>
+                                        @foreach ($user_details as $user)
+                                            @php
+                                                $seller = $user->seller;
+                                            @endphp
+                                            <option value="{{ $seller->seller_id }}">{{ $seller->seller_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-primary btn-block" id="filter">Filter</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="">Status :</label>
-                            <select name="" id="" class="form-control js-example-basic-multiple" multiple>
-                                <option value="" selected>All</option>
-                                <option value="">Ayesh Nawawickrama</option>
-                                <option value="">COD</option>
-                                <option value="">CCP</option>
-                                <option value="">CRE</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="">Branch :</label>
-                            <select name="" id="" class="form-control js-example-basic-single">
-                                <option value="" selected>All</option>
-                                <option value="">Ayesh Nawawickrama</option>
-                                <option value="">COD</option>
-                                <option value="">CCP</option>
-                                <option value="">CRE</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="">Client :</label>
-                            <select name="" id="" class="form-control js-example-basic-single">
-                                <option value="" selected>All</option>
-                                <option value="">Ayesh Nawawickrama</option>
-                                <option value="">COD</option>
-                                <option value="">CCP</option>
-                                <option value="">CRE</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-3">
-                            <button type="submit" class="btn btn-primary btn-block">Filter</button>
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="row mt-4">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header bg-primary text-white">
-                <p>Orders</p>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="my-order-table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Date</th>
-                                <th scope="col">Waybill ID</th>
-                                <th scope="col">Pickup Branch</th>
-                                <th scope="col">Branch</th>
-                                <th scope="col">Seller</th>
-                                <th scope="col">Customer</th>
-                                <th scope="col">Delivery Address</th>
-                                <th scope="col">Mobile</th>
-                                <th scope="col">Mobile (Secondary)</th>
-                                <th scope="col">COD (LKR)</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+    @endcan
+    @can('order.view')
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <p>Orders</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="my-order-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Waybill ID</th>
+                                        <th scope="col">Pickup Branch</th>
+                                        <th scope="col">Branch</th>
+                                        <th scope="col">Seller</th>
+                                        <th scope="col">Receiver</th>
+                                        <th scope="col">Delivery Address</th>
+                                        <th scope="col">Mobile</th>
+                                        <th scope="col">Mobile (Secondary)</th>
+                                        <th scope="col">COD (LKR)</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                        </tbody>
-                    </table>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endcan
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalone" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Body
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save</button>
                 </div>
             </div>
         </div>
     </div>
-</div>
-@stop
+    <!-- Button trigger modal -->
 
-@push('scripts')
+
     <script>
-        $(function() {
+        $('document').ready(function() {
+            load_data();
+        });
+
+        function load_data(from_date, to_date, status, branch_id, seller_id) {
             $('#my-order-table').DataTable({
+                drawCallback: function() {
+                    feather.replace();
+                },
+                dom: 'Bfrtip',
+                lengthMenu: [
+                    [10, 50, 100, 500, 1000, 5000, -1],
+                    ['10 rows', '50 rows', '100 rows', '500 rows', '1000 rows', '5000 rows', 'Show all']
+                ],
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print', 'pageLength'
+                ],
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('my_order_data_table') }}",
-
+                ajax: {
+                    url: '{{ route('my_order_data_table') }}',
+                    data: {
+                        from_date: from_date,
+                        to_date: to_date,
+                        status: status,
+                        branch_id: branch_id,
+                        seller_id: seller_id
+                    }
+                },
                 columns: [{
                         data: 'st_1_at',
                         name: 'st_1_at'
@@ -148,12 +197,26 @@
                     {
                         data: 'status',
                         name: 'status'
-                    },                   
-                    
-                ]
+                    },
+                    {
+                        data: 'action',
+                        name: 'action'
+                    },
+                ],
             });
+        };
+
+        $('#filter').click(function() {
+            var from_date = $('#date_from').val();
+            var to_date = $('#date_to').val();
+            var status = $('#status').val();
+            var branch_id = $('#branch_id').val();
+            var seller_id = $('#seller_id').val();
+
+            $('#my-order-table').DataTable().destroy();
+            load_data(from_date, to_date, status, branch_id, seller_id);
 
         });
     </script>
 
-@endpush
+@endsection

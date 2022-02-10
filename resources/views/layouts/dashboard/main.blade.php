@@ -14,17 +14,15 @@
     <link rel="stylesheet" href="{{ url('assets/vendors/bootstrap-colorpicker/bootstrap-colorpicker.min.css') }}">
     <link rel="stylesheet" href="{{ url('assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
     <link rel="stylesheet" href="{{ url('assets/vendors/font-awesome/css/font-awesome.min.css') }}">
-    <link rel="stylesheet"
-        href="{{ url('assets/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css') }}">
     <link rel="stylesheet" href="{{ url('assets/fonts/feather-font/css/iconfont.css') }}">
     <link rel="stylesheet" href="{{ url('assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
     <link rel="stylesheet" href="{{ url('assets/css/demo_1/style.css') }}">
     <link rel="stylesheet" href="{{ url('assets/vendors/sweetalert2/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css">
-    <link rel="stylesheet" href="sweetalert2.min.css">
     <script src="{{ url('assets/vendors/core/core.js') }}"></script>
-    <link rel="stylesheet" href="style.css">
+    
     <link rel="shortcut icon" href="{{ url('assets/images/favicon.png') }}" />
     <link rel="stylesheet" href="{{ url('assets/css/validation/validation.css') }}">
     <link rel="stylesheet" href="{{ url('assets/css/main.css') }}">
@@ -161,7 +159,6 @@
             <footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between">
                 <p class="text-muted text-center text-md-left">Copyright © 2021 <a href="https://www.prodesigner.lk"
                         target="_blank">PRODESIGNER.LK (PVT) LTD</a>. All rights reserved</p>
-                {{-- <p class="text-muted text-center text-md-left mb-0 d-none d-md-block">Handcrafted With <i class="mb-1 text-primary ml-1 icon-small" data-feather="heart"></i> of Laravel</p> --}}
                 <p class="text-muted text-center text-md-left mb-0 d-none d-md-block">v{{ env('APP_VERSION') }}</p>
             </footer>
         </div>
@@ -194,8 +191,9 @@
     <script src="{{ url('assets/js/timepicker.js') }}"></script>
     <script src="{{ url('assets/vendors/sweetalert2/sweetalert2.min.js') }}"></script>
     <script src="{{ url('assets/vendors/promise-polyfill/polyfill.min.js') }}"></script>
-    <script src="{{ url('assets/js/sweet-alert.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url('assets/vendors/prismjs/prism.js') }}"></script>
+	<script src="{{ url('/assets/vendors/clipboard/clipboard.min.js') }}"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"></script>
@@ -205,8 +203,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"></script>
-    {{-- <script src="sweetalert2.all.min.js"></script> --}}
     <script src="{{ url('assets/js/validation/form-validateion.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
 
     @stack('scripts')
