@@ -83,10 +83,10 @@
                     <span class="link-title">Distribute</span>
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="/dis/collect" class="nav-link">Collect Processing Orders</a>
+                            <a href="{{ route('dis_collected_orders_get') }}" class="nav-link">Collect Processing Orders</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/dis/dispatch" class="nav-link">Dispatch Collected Orders</a>
+                            <a href="{{ route('dis_dispatched_orders_get') }}" class="nav-link">Dispatch Orders</a>
                         </li>
                         <li class="nav-item">
                             <a href="/dis/to-be-receive" class="nav-link">To Be Receive Packages</a>

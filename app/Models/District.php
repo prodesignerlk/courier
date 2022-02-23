@@ -17,4 +17,9 @@ class District extends Model
     {
         return $this->hasMany(City::class, 'district_id');
     }
+
+    public function receiver()
+    {
+        return $this->hasMany(Receiver::class, 'receiver_district_id', 'district_id');
+    }
 }

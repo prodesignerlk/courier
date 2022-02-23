@@ -5,10 +5,10 @@
         <div class="form-row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header bg-primary text-white">
+                    <div class="card-header bg-primary text-white search-header">
                         <p>Filtering</p>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body search-body">
 
                         <div class="form-row">
                             <div class="form-group col-md-3">
@@ -87,7 +87,7 @@
         $('document').ready(function() {
             load_data();
         });
-
+        
         function load_data(from_date, to_date, branch_id, seller_id) {
             $('#pending-order').DataTable({
                 drawCallback: function() {
@@ -101,6 +101,7 @@
                 buttons: [
                     'copy', 'csv', 'excel', 'pdf', 'print', 'pageLength'
                 ],
+                scrollX: true,
                 processing: true,
                 serverSide: true,
                 ajax: {

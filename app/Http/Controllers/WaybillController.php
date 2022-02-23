@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Organization;
 use App\Models\Package;
 use App\Models\Seller;
@@ -130,13 +131,31 @@ class WaybillController extends Controller
             $package_details = $package_details->where('seller_id', $seller_id);
         }
 
-        $package_details = $package_details->first();
-        if($package_details == null){
-            $seller_details = null;
-        }else{
+        if($package_details->count() > 0){
+            $package_details = $package_details->first();
+            
             $seller_details = $package_details->seller;
-        }
+            $order_details = $package_details->order;
 
-        return response()->json($seller_details);
+            if(!empty($order_details)){
+                $receiver_details = $order_details->receiver;
+                $city_details = $receiver_details->city;
+                $district_details = $receiver_details->district;
+            }else{
+                $receiver_details = 'null';
+                $order_details = 'null';
+                $city_details = 'null';
+                $district_details = 'null';
+            }
+        }else{
+            $seller_details = 'null';
+            $receiver_details = 'null';
+            $package_details = 'null';
+            $order_details = 'null';
+            $city_details = 'null';
+            $district_details = 'null';
+        }
+    
+        return response()->json(['district_details' => $district_details, 'city_details' => $city_details, 'seller_details' => $seller_details, 'package_details' => $package_details, 'receiver_details' => $receiver_details, 'order_details' => $order_details]);
     }
 }

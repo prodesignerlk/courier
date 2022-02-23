@@ -27,5 +27,10 @@ class Package extends Model
     {
         return $this->belongsTo(Seller::class, 'seller_id');
     }
+
+    public function order()
+    {
+        return $this->hasOne(Order::class, 'waybill_id', 'waybill_id');
+    }
     
 }

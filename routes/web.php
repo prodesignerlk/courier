@@ -57,17 +57,25 @@ Route::view('/barcode-print','order-management.barcode-print')->name('barcode-pr
 //Order Mgt ================================================================================================================================
 
 //pick-ups
-Route::get('/pick-up-pending-orders',[OrderController::class, 'pick_up_pending_orders_get'])->name('pick_up_pending_orders_get');
-Route::get('/data-table-pick-up-pending-orders',[OrderController::class, 'pick_up_pending_orders_data_table'])->name('pick_up_pending_orders_data_table');
+Route::get('/pick-up/pending-orders',[OrderController::class, 'pick_up_pending_orders_get'])->name('pick_up_pending_orders_get');
+Route::get('/pick-up/data-table-pending-orders',[OrderController::class, 'pick_up_pending_orders_data_table'])->name('pick_up_pending_orders_data_table');
 
-Route::get('/pick-up-collected',[OrderController::class, 'pick_up_collected_orders_get'])->name('pick_up_collected_orders_get');
-Route::get('/data-table-pick-up-collected-orders',[OrderController::class, 'pick_up_collected_orders_data_table'])->name('pick_up_collected_orders_data_table');
-Route::post('/pick-up-collected',[StatusChangeController::class, 'pickup_collected'])->name('pickup_collected');
+Route::get('/pick-up/collected',[OrderController::class, 'pick_up_collected_orders_get'])->name('pick_up_collected_orders_get');
+Route::get('/pick-up/data-table-collected-orders',[OrderController::class, 'pick_up_collected_orders_data_table'])->name('pick_up_collected_orders_data_table');
+Route::post('/pick-up/collected',[StatusChangeController::class, 'pickup_collected'])->name('pickup_collected');
 
-Route::get('/pick-up-dispatched',[OrderController::class, 'pick_up_dispatched_orders_get'])->name('pick_up_dispatched_orders_get');
-Route::get('/data-table-pick-up-dispatched_-orders',[OrderController::class, 'pick_up_dispatched_orders_data_table'])->name('pick_up_dispatched_orders_data_table');
-Route::post('/pick-up-dispatched',[StatusChangeController::class, 'pickup_dispatched'])->name('pickup_dispatched');
+Route::get('/pick-up/dispatched',[OrderController::class, 'pick_up_dispatched_orders_get'])->name('pick_up_dispatched_orders_get');
+Route::get('/pick-up/data-table-dispatched_-orders',[OrderController::class, 'pick_up_dispatched_orders_data_table'])->name('pick_up_dispatched_orders_data_table');
+Route::post('/pick-up/dispatched',[StatusChangeController::class, 'pickup_dispatched'])->name('pickup_dispatched');
 
+//Distribute
+Route::get('/dis/collect-ord',[OrderController::class, 'dis_collected_orders_get'])->name('dis_collected_orders_get');
+Route::get('/dis/data-table-collected-orders',[OrderController::class, 'dis_collected_orders_data_table'])->name('dis_collected_orders_data_table');
+Route::post('/dis/collected-odr',[StatusChangeController::class, 'dis_collected'])->name('dis_collected');
+
+Route::get('/dis/dispatched-ord',[OrderController::class, 'dis_dispatched_orders_get'])->name('dis_dispatched_orders_get');
+Route::get('/dis/data-table-dispatched-orders',[OrderController::class, 'dis_dispatched_orders_data_table'])->name('dis_dispatched_orders_data_table');
+Route::post('/dis/dispatched-odr',[StatusChangeController::class, 'dis_dispatched'])->name('dis_dispatched');
 
 // Comman Ajax================================================================================================================================
 Route::post('/ajax/get-sellers-details', [SellerController::class, 'get_all_seller_details'])->name('get_seller_details');
@@ -89,70 +97,52 @@ Route::get('/default-settings', function () {return view('/settings/default-sett
 
 // Process Operation
 
-// pickups
-// pending
-
-// collect
-Route::get('/pickup/collected', function () {
-    return view('/process/pick-collect');
-});
-// Dispatched
-Route::get('/pickup/dispatched', function () {
-    return view('/process/pick-dispatch');
-});
 
 //distribute
-// collect
-Route::get('/dis/collect', function () {
-    return view('/process/dis-collect');
-});
-// dispatch
-Route::get('/dis/dispatch', function () {
-    return view('/process/dis-dispatch');
-});
+
 // To be Receive Packages 
 Route::get('/dis/to-be-receive', function () {
-    return view('/process/dis-to-be-receive');
+    return view('/process/distribute/dis-to-be-receive');
 });
 // Received Packages 
 Route::get('/dis/received', function () {
-    return view('/process/dis-received');
+    return view('/process/distribute/dis-received');
 });
 
 // handover
 // Assign To Agent
 Route::get('/hand/assign-to-agent', function () {
-    return view('/process/hand-assign-to-agent');
+    return view('/process/handover/hand-assign-to-agent');
 });
 // deliverd order
 Route::get('/hand/deliverd', function () {
-    return view('/process/hand-deliverd');
+    return view('/process/handover/hand-deliverd');
 });
 // reschedule
 Route::get('/hand/reshedule', function () {
-    return view('/process/hand-reshedule');
+    return view('/process/handover/hand-reshedule');
 });
 // deliver fails
 Route::get('/hand/fails', function () {
-    return view('/process/hand-fails');
+    return view('/process/handover/hand-fails');
 });
 
 // Fails 
 // mis-route
 Route::get('/fail/mis-route', function () {
-    return view('/process/fail-mis-route');
+    return view('/process/fail/fail-mis-route');
 });
 // re-route
 Route::get('/fail/re-route', function () {
-    return view('/process/fail-re-route');
+    return view('/process/fail/fail-re-route');
 });
 // HO (Returns) 
 Route::get('/fail/received-ho', function () {
-    return view('/process/fail-received-ho');
+    return view('/process/fail/fail-received-ho');
 });
 // Return to Client 
 Route::get('/fail/return', function () {
-    return view('/process/fail-return');
+    return view('/process/fail/fail-return');
 });
 
 // Return to Client 

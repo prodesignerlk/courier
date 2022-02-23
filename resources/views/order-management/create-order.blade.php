@@ -117,11 +117,11 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="">Order Description :</label>
-                                    <input type="text" name="order_description" id=""
-                                        class="form-control @error('order_description') is-invalid @enderror"
-                                        value="{{ old('order_description') }}">
-                                    @error('order_description')
+                                    <label for="">remark :</label>
+                                    <input type="text" name="remark" id=""
+                                        class="form-control @error('remark') is-invalid @enderror"
+                                        value="{{ old('remark') }}">
+                                    @error('remark')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -298,8 +298,8 @@
                 },
                 success: function(data) {
                     // console.log(data);
-                    if (data.seller_name) {
-                        option = "<option selected value=" + data.seller_id + ">" + data.seller_name +
+                    if (data.seller_details) {
+                        option = "<option selected value=" + data.seller_details.seller_id + ">" + data.seller_details.seller_name +
                             "</option>";
 
                     } else {

@@ -62,7 +62,7 @@ class OrderController extends Controller
             'cus_contact_2' => 'nullable|digits:10',
             'district_id' => 'required|exists:districts,district_id',
             'city_id' => 'required|exists:cities,city_id',
-            'order_description' => 'nullable',
+            'remark' => 'nullable',
             'cod' => 'required|numeric',
             'pickup_branch_id' => 'required|exists:branches,branch_id',
         ]);
@@ -99,6 +99,7 @@ class OrderController extends Controller
                     'pickup_branch_id' => request('pickup_branch_id'),
                     'receiver_id' => $receiver_info->receiver_id,
                     'seller_id' => request('seller_id'),
+                    'remark' => request('remark')
                 ]);
             });
         } catch (Throwable $e) {
@@ -147,7 +148,7 @@ class OrderController extends Controller
         if (!$permission) {
             abort(403);
         }
-
+        
         $query = DB::table('orders')
             ->join('sellers', 'sellers.seller_id', '=', 'orders.seller_id')
             ->join('receivers', 'receivers.receiver_id', '=', 'orders.receiver_id')
@@ -162,20 +163,27 @@ class OrderController extends Controller
             $banch_id = $user->staff->branch->banch_id;
             $query = $query->whereIn('orders.branch_id', [$banch_id]);
         }
+        
+        $search_st = "st_1_at";
 
         if ($request->ajax()) {
+
+            if(!empty($request->status)){
+                $search_st = 'st_'.$request->status.'_at';
+            }
+            
             if (!empty($request->from_date) && !empty($request->to_date)) {
-                $query = $query->whereBetween('st_1_at', [$request->from_date, $request->to_date]);
+                $query = $query->whereBetween($search_st, [$request->from_date, $request->to_date]);
             } elseif (!empty($request->from_date) || !empty($request->to_date)) {
                 if (!empty($request->from_date)) {
-                    $query = $query->whereDate('st_1_at', $request->from_date);
+                    $query = $query->whereDate($search_st, $request->from_date);
                 } else {
-                    $query = $query->whereDate('st_1_at', $request->to_date);
+                    $query = $query->whereDate($search_st, $request->to_date);
                 }
             }
 
             if ($request->status) {
-                $query = $query->whereIn('status', [$request->status]);
+                $query = $query->where('orders.status', $request->status);
             }
 
             if ($request->branch_id) {
@@ -197,6 +205,9 @@ class OrderController extends Controller
                 } else {
                     return 'N/A';
                 }
+            })
+            ->editColumn('date', function($query) use($search_st){
+                return $query->$search_st;
             })
             ->editColumn('receiver_conatct_2', function ($query) {
                 if ($query->receiver_conatct_2) return $query->receiver_conatct_2;
@@ -498,6 +509,207 @@ class OrderController extends Controller
             ->editColumn('pickup_branch', function ($query) {
                 if ($query->pickup_branch_id) {
                     $branch_info = Branch::find($query->pickup_branch_id);
+                    return $branch_info->branch_code . ' - ' . $branch_info->branch_name;
+                } else {
+                    return 'N/A';
+                }
+            })
+            ->editColumn('receiver_conatct_2', function ($query) {
+                if ($query->receiver_conatct_2) return $query->receiver_conatct_2;
+                else return 'N/A';
+            })
+            ->editColumn('action', function ($query) {
+                $view = "<button type='button' class='btn btn-success btn-icon btn-view' data-id='$query->waybill_id' data-toggle='tooltip' data-placement='top' title='View'><i data-feather='eye'></i></button>";
+                $edit = "<button type='button' class='btn btn-warning btn-icon btn-email' data-toggle='tooltip' data-placement='top' title='Edit'><i data-feather='edit'></i></button>";
+                return $view . ' ' . $edit;
+            })
+            ->rawColumns(['status', 'action'])
+
+            ->make(true);
+    }
+
+    public function dis_collected_orders_get()
+    {
+        /** @var User $user */
+        $user = Auth::user();
+        $permission = $user->can('order-collected.view');
+
+        if (!$permission) {
+            abort(403);
+        }
+
+        if ($user->hasRole('Seller')) {
+            $user_details = User::where($user->id)->get();
+            $branch_details = Branch::where('status', '1')->get();
+            
+        } elseif ($user->branch_staff == 1) {
+            $branch_details = $user->staff->branch;
+            $user_details = null;
+            $branch_details = Branch::whereIn('branch_id', [$branch_details->branch_id])->get();
+
+        } else {
+            $user_details = Role::where('name', 'Seller')->first()->users;
+            $branch_details = Branch::where('status', '1')->get();
+        }
+
+        $district_details = District::all();
+        $city_details = City::all();
+        return view('process.distribute.dis-collect')->with(['branch_details' => $branch_details, 'user_details' => $user_details, 'district_details' => $district_details, 'city_details' => $city_details]);
+    }
+
+    public function dis_collected_orders_data_table(Request $request)
+    {
+        /** @var User $user */
+        $user = Auth::user();
+        $permission = $user->can('order-collected.view');
+
+        if (!$permission) {
+            abort(403);
+        }
+
+        $query = DB::table('orders')
+            ->join('sellers', 'sellers.seller_id', '=', 'orders.seller_id')
+            ->join('receivers', 'receivers.receiver_id', '=', 'orders.receiver_id')
+            ->join('order_statuses', 'order_status_id', '=', 'orders.status')
+            ->where('orders.status', '4');
+
+        if ($user->hasRole('Seller')) {
+            $seller_info = $user->seller;
+            $query = $query->where('sellers.seller_id', $seller_info->seller_id);
+        }
+
+        if($user->branch_staff == 1){
+            $banch_id = $user->staff->branch->banch_id;
+            $query = $query->whereIn('orders.pickup_branch_id', [$banch_id]);
+        }
+
+        if ($request->ajax()) {
+            if (!empty($request->from_date) && !empty($request->to_date)) {
+                $query = $query->whereBetween('st_4_at', [$request->from_date, $request->to_date]);
+            } elseif (!empty($request->from_date) || !empty($request->to_date)) {
+                if (!empty($request->from_date)) {
+                    $query = $query->whereDate('st_4_at', $request->from_date);
+                } else {
+                    $query = $query->whereDate('st_4_at', $request->to_date);
+                }
+            }
+
+            if ($request->branch_id) {
+                $query = $query->where('pickup_branch_id', $request->branch_i);
+            }
+
+            if ($request->seller_id) {
+                $query = $query->where('sellers.seller_id', $request->seller_id);
+            }
+        }
+
+        $query = $query->get();
+
+        return DataTables::of($query)
+            ->editColumn('pickup_branch', function ($query) {
+                if ($query->pickup_branch_id) {
+                    $branch_info = Branch::find($query->pickup_branch_id);
+                    return $branch_info->branch_code . ' - ' . $branch_info->branch_name;
+                } else {
+                    return 'N/A';
+                }
+            })
+            ->editColumn('receiver_conatct_2', function ($query) {
+                if ($query->receiver_conatct_2) return $query->receiver_conatct_2;
+                else return 'N/A';
+            })
+            ->editColumn('action', function ($query) {
+                $view = "<button type='button' class='btn btn-success btn-icon btn-view' data-id='$query->waybill_id' data-toggle='tooltip' data-placement='top' title='View'><i data-feather='eye'></i></button>";
+                $edit = "<button type='button' class='btn btn-warning btn-icon btn-email' data-toggle='tooltip' data-placement='top' title='Edit'><i data-feather='edit'></i></button>";
+                return $view . ' ' . $edit;
+            })
+            ->rawColumns(['status', 'action'])
+
+            ->make(true);
+    }
+
+    public function dis_dispatched_orders_get()
+    {
+        /** @var User $user */
+        $user = Auth::user();
+        $permission = $user->can('order-collected.view');
+
+        if (!$permission) {
+            abort(403);
+        }
+
+        if ($user->hasRole('Seller')) {
+            $user_details = User::where($user->id)->get();
+            $branch_details = Branch::where('status', '1')->get();
+            
+        } elseif ($user->branch_staff == 1) {
+            $branch_details = $user->staff->branch;
+            $user_details = null;
+            $branch_details = Branch::whereIn('branch_id', [$branch_details->branch_id])->get();
+
+        } else {
+            $user_details = Role::where('name', 'Seller')->first()->users;
+            $branch_details = Branch::where('status', '1')->get();
+        }
+
+        $district_details = District::all();
+        $city_details = City::all();
+        $all_branch = Branch::where('status', '1')->get();
+        return view('process.distribute.dis-dispatch')->with(['all_branch' => $all_branch, 'branch_details' => $branch_details, 'user_details' => $user_details, 'district_details' => $district_details, 'city_details' => $city_details]);
+    }
+
+    public function dis_dispatched_orders_data_table(Request $request)
+    {
+        /** @var User $user */
+        $user = Auth::user();
+        $permission = $user->can('order-collected.view');
+
+        if (!$permission) {
+            abort(403);
+        }
+
+        $query = DB::table('orders')
+            ->join('sellers', 'sellers.seller_id', '=', 'orders.seller_id')
+            ->join('receivers', 'receivers.receiver_id', '=', 'orders.receiver_id')
+            ->join('order_statuses', 'order_status_id', '=', 'orders.status')
+            ->where('orders.status', '5');
+
+        if ($user->hasRole('Seller')) {
+            $seller_info = $user->seller;
+            $query = $query->where('sellers.seller_id', $seller_info->seller_id);
+        }
+
+        if($user->branch_staff == 1){
+            $banch_id = $user->staff->branch->banch_id;
+            $query = $query->whereIn('orders.pickup_branch_id', [$banch_id]);
+        }
+
+        if ($request->ajax()) {
+            if (!empty($request->from_date) && !empty($request->to_date)) {
+                $query = $query->whereBetween('st_5_at', [$request->from_date, $request->to_date]);
+            } elseif (!empty($request->from_date) || !empty($request->to_date)) {
+                if (!empty($request->from_date)) {
+                    $query = $query->whereDate('st_5_at', $request->from_date);
+                } else {
+                    $query = $query->whereDate('st_5_at', $request->to_date);
+                }
+            }
+
+            if ($request->branch_id) {
+                $query = $query->where('branch_id', $request->branch_i);
+            }
+
+            if ($request->seller_id) {
+                $query = $query->where('sellers.seller_id', $request->seller_id);
+            }
+        }
+
+        $query = $query->get();
+
+        return DataTables::of($query)
+            ->editColumn('branch', function ($query) {
+                if ($query->branch_id) {
+                    $branch_info = Branch::find($query->branch_id);
                     return $branch_info->branch_code . ' - ' . $branch_info->branch_name;
                 } else {
                     return 'N/A';

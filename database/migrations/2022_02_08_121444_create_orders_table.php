@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id('order_id');
             $table->float('cod_amount');
             $table->float('delivery_cost')->nullable();
-
+            $table->text('remark')->nullable();
             $table->unsignedBigInteger('status')->default('1');
 
             //1->processing 

@@ -211,6 +211,17 @@
     @stack('scripts')
 </body>
 <script>
+    $('document').ready(function(){
+        $('.search-body').slideUp();
+        $('.search-header').click(function () { 
+            $('.search-body').slideToggle();
+            $('.action-body').slideToggle();
+        });
+        $('.action-header').click(function () { 
+            $('.search-body').slideToggle();
+            $('.action-body').slideToggle();
+        });
+    });
     $('#regular-table').DataTable({
         "bSortClasses": false,
 

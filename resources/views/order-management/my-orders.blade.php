@@ -11,19 +11,18 @@
                     <div class="card-body">
 
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-2">
                                 <label for="">From :</label>
                                 <input type="date" name="date_from" id="date_from" class="form-control">
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-2">
                                 <label for="">To :</label>
                                 <input type="date" name="date_to" id="date_to" class="form-control">
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-2">
                                 <label for="">Status :</label>
-                                <select name="status[]" id="status" class="form-control js-example-basic-multiple" multiple>
+                                <select name="status" id="status" class="form-control js-example-basic-single">
+                                    <option value=''>Select All</option>
                                     @foreach ($status_details as $status)
                                         <option value="{{ $status->order_status_id }}">{{ $status->status }}</option>
                                     @endforeach
@@ -76,7 +75,7 @@
                             <table class="table table-bordered" id="my-order-table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Date</th>
+                                        <th scope="col">Status Date</th>
                                         <th scope="col">Waybill ID</th>
                                         <th scope="col">Pickup Branch</th>
                                         <th scope="col">Branch</th>
@@ -142,6 +141,7 @@
                 buttons: [
                     'copy', 'csv', 'excel', 'pdf', 'print', 'pageLength'
                 ],
+                scrollX: true,
                 processing: true,
                 serverSide: true,
                 ajax: {
@@ -155,8 +155,8 @@
                     }
                 },
                 columns: [{
-                        data: 'st_1_at',
-                        name: 'st_1_at'
+                        data: 'date',
+                        name: 'date'
                     },
                     {
                         data: 'waybill_id',
@@ -213,6 +213,7 @@
             var branch_id = $('#branch_id').val();
             var seller_id = $('#seller_id').val();
 
+            console.log(status);
             $('#my-order-table').DataTable().destroy();
             load_data(from_date, to_date, status, branch_id, seller_id);
 

@@ -21,4 +21,19 @@ class Receiver extends Model
         'receiver_city_id',
         'receiver_district_id'
     ];
+
+    public function order()
+    {
+        return $this->hasOne(Order::class, 'receiver_id');
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'receiver_city_id', 'city_id');
+    }
+
+    public function district()
+    {
+        return $this->belongsTo(District::class, 'receiver_district_id', 'district_id');
+    }
 }

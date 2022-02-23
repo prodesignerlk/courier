@@ -16,6 +16,7 @@ class Order extends Model
     protected $fillable = [
         'cod_amount',
         'delivery_cost',
+        'remark',
         'status',
         'st_1_at',
         'st_1_by',
@@ -56,5 +57,15 @@ class Order extends Model
     public function branch()
     {
         return $this->belongsTo(Branch::class, 'branch_id');
+    }
+
+    public function receiver()
+    {
+        return $this->belongsTo(Receiver::class, 'receiver_id');
+    }
+
+    public function package()
+    {
+        return $this->belongsTo(Package::class, 'waybill_id', 'waybill_id');
     }
 }

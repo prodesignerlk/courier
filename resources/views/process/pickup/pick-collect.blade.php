@@ -9,10 +9,10 @@
         <div class="form-row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header bg-primary text-white">
+                    <div class="card-header bg-primary text-white action-header">
                         <p>Mark as Pick-ups Collected </p>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body action-body">
                         <div class="form-row">
                             <div class="form-group col-md-8">
                                 <input type="text" name="" id="scan_waybill" class="form-control"
@@ -33,10 +33,10 @@
         <div class="form-row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header bg-primary text-white">
+                    <div class="card-header bg-primary text-white search-header">
                         <p>Filtering</p>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body search-body">
                         <div class="form-row">
                             <div class="form-group col-md-3">
                                 <label for="">From :</label>
@@ -129,6 +129,7 @@
                     buttons: [
                         'copy', 'csv', 'excel', 'pdf', 'print', 'pageLength'
                     ],
+                    scrollX: true,
                     processing: true,
                     serverSide: true,
                     ajax: {

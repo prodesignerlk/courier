@@ -17,4 +17,9 @@ class City extends Model
     {
         return $this->belongsTo(District::class, 'district_id');
     }
+
+    public function receiver()
+    {
+        return $this->hasMany(Receiver::class, 'receiver_city_id', 'city_id');
+    }
 }

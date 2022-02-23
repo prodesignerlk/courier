@@ -21,8 +21,6 @@
                         </div>
                     </div>
                     <hr>
-                    {{-- මෙහෙම ටිකක් තිබුනේ නැ 
-                    හිස් ගතිය යන්න දැම්මේ  --}}
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label for="">Customer Name</label>
