@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\OrderBulkImport;
 use App\Models\Branch;
 use App\Models\City;
 use App\Models\District;
@@ -9,7 +10,6 @@ use App\Models\Order;
 use App\Models\OrderStatus;
 use App\Models\Package;
 use App\Models\Receiver;
-use App\Models\Seller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -110,6 +110,45 @@ class OrderController extends Controller
         return back()->with(['success' => 'Order Created']);
     }
 
+    public function create_bulk_order_post(Request $request)
+    {
+        /** @var User $user */
+        $user = Auth::user();
+
+        $permission = $user->can('order.create');
+
+        if (!$permission) {
+            abort(403);
+        }
+
+        $file = request()->file('select_file');
+
+        $rules = [
+            'select_file'  => 'required|mimes:xls,xlsx',
+            'bulk_pickup_branch_id' => 'required'
+        ];
+
+        $customMessages = [
+            'required' => 'The :attribute field is required.'
+        ];
+
+        $this->validate($request, $rules, $customMessages);
+
+        $file = $request->file('select_file')->store('imports');
+        $data = [
+            'pickup_branch_id' => request('bulk_pickup_branch_id')
+        ];
+
+        $import = new OrderBulkImport($data);
+        $import->import($file);
+
+        if (count($import->errors()) > 0) {
+            return back()->with(['alert' => 'fail', 'error' => 'Bulk Upload Fail']);
+        } else {
+            return back()->with(['alert' => 'done']);
+        }
+    }
+
     public function my_order_get()
     {
         /** @var User $user */
@@ -123,12 +162,10 @@ class OrderController extends Controller
         if ($user->hasRole('Seller')) {
             $user_details = User::where($user->id)->get();
             $branch_details = Branch::where('status', '1')->get();
-
         } elseif ($user->branch_staff == 1) {
             $branch_details = $user->staff->branch;
             $user_details = null;
             $branch_details = Branch::whereIn('branch_id', [$branch_details->branch_id])->get();
-
         } else {
             $user_details = Role::where('name', 'Seller')->first()->users;
             $branch_details = Branch::where('status', '1')->get();
@@ -148,7 +185,7 @@ class OrderController extends Controller
         if (!$permission) {
             abort(403);
         }
-        
+
         $query = DB::table('orders')
             ->join('sellers', 'sellers.seller_id', '=', 'orders.seller_id')
             ->join('receivers', 'receivers.receiver_id', '=', 'orders.receiver_id')
@@ -159,19 +196,19 @@ class OrderController extends Controller
             $query = $query->where('sellers.seller_id', $seller_info->seller_id);
         }
 
-        if($user->branch_staff == 1){
+        if ($user->branch_staff == 1) {
             $banch_id = $user->staff->branch->banch_id;
             $query = $query->whereIn('orders.branch_id', [$banch_id]);
         }
-        
+
         $search_st = "st_1_at";
 
         if ($request->ajax()) {
 
-            if(!empty($request->status)){
-                $search_st = 'st_'.$request->status.'_at';
+            if (!empty($request->status)) {
+                $search_st = 'st_' . $request->status . '_at';
             }
-            
+
             if (!empty($request->from_date) && !empty($request->to_date)) {
                 $query = $query->whereBetween($search_st, [$request->from_date, $request->to_date]);
             } elseif (!empty($request->from_date) || !empty($request->to_date)) {
@@ -206,7 +243,7 @@ class OrderController extends Controller
                     return 'N/A';
                 }
             })
-            ->editColumn('date', function($query) use($search_st){
+            ->editColumn('date', function ($query) use ($search_st) {
                 return $query->$search_st;
             })
             ->editColumn('receiver_conatct_2', function ($query) {
@@ -248,12 +285,10 @@ class OrderController extends Controller
         if ($user->hasRole('Seller')) {
             $user_details = User::where($user->id)->get();
             $branch_details = Branch::where('status', '1')->get();
-            
         } elseif ($user->branch_staff == 1) {
             $branch_details = $user->staff->branch;
             $user_details = null;
             $branch_details = Branch::whereIn('branch_id', [$branch_details->branch_id])->get();
-
         } else {
             $user_details = Role::where('name', 'Seller')->first()->users;
             $branch_details = Branch::where('status', '1')->get();
@@ -282,7 +317,7 @@ class OrderController extends Controller
             $query = $query->where('sellers.seller_id', $seller_info->seller_id);
         }
 
-        if($user->branch_staff == 1){
+        if ($user->branch_staff == 1) {
             $banch_id = $user->staff->branch->banch_id;
             $query = $query->whereIn('orders.pickup_branch_id', [$banch_id]);
         }
@@ -345,12 +380,10 @@ class OrderController extends Controller
         if ($user->hasRole('Seller')) {
             $user_details = User::where($user->id)->get();
             $branch_details = Branch::where('status', '1')->get();
-            
         } elseif ($user->branch_staff == 1) {
             $branch_details = $user->staff->branch;
             $user_details = null;
             $branch_details = Branch::whereIn('branch_id', [$branch_details->branch_id])->get();
-
         } else {
             $user_details = Role::where('name', 'Seller')->first()->users;
             $branch_details = Branch::where('status', '1')->get();
@@ -380,7 +413,7 @@ class OrderController extends Controller
             $query = $query->where('sellers.seller_id', $seller_info->seller_id);
         }
 
-        if($user->branch_staff == 1){
+        if ($user->branch_staff == 1) {
             $banch_id = $user->staff->branch->banch_id;
             $query = $query->whereIn('orders.pickup_branch_id', [$banch_id]);
         }
@@ -443,12 +476,10 @@ class OrderController extends Controller
         if ($user->hasRole('Seller')) {
             $user_details = User::where($user->id)->get();
             $branch_details = Branch::where('status', '1')->get();
-            
         } elseif ($user->branch_staff == 1) {
             $branch_details = $user->staff->branch;
             $user_details = null;
             $branch_details = Branch::whereIn('branch_id', [$branch_details->branch_id])->get();
-
         } else {
             $user_details = Role::where('name', 'Seller')->first()->users;
             $branch_details = Branch::where('status', '1')->get();
@@ -478,7 +509,7 @@ class OrderController extends Controller
             $query = $query->where('sellers.seller_id', $seller_info->seller_id);
         }
 
-        if($user->branch_staff == 1){
+        if ($user->branch_staff == 1) {
             $banch_id = $user->staff->branch->banch_id;
             $query = $query->whereIn('orders.pickup_branch_id', [$banch_id]);
         }
@@ -541,12 +572,10 @@ class OrderController extends Controller
         if ($user->hasRole('Seller')) {
             $user_details = User::where($user->id)->get();
             $branch_details = Branch::where('status', '1')->get();
-            
         } elseif ($user->branch_staff == 1) {
             $branch_details = $user->staff->branch;
             $user_details = null;
             $branch_details = Branch::whereIn('branch_id', [$branch_details->branch_id])->get();
-
         } else {
             $user_details = Role::where('name', 'Seller')->first()->users;
             $branch_details = Branch::where('status', '1')->get();
@@ -578,7 +607,7 @@ class OrderController extends Controller
             $query = $query->where('sellers.seller_id', $seller_info->seller_id);
         }
 
-        if($user->branch_staff == 1){
+        if ($user->branch_staff == 1) {
             $banch_id = $user->staff->branch->banch_id;
             $query = $query->whereIn('orders.pickup_branch_id', [$banch_id]);
         }
@@ -641,12 +670,10 @@ class OrderController extends Controller
         if ($user->hasRole('Seller')) {
             $user_details = User::where($user->id)->get();
             $branch_details = Branch::where('status', '1')->get();
-            
         } elseif ($user->branch_staff == 1) {
             $branch_details = $user->staff->branch;
             $user_details = null;
             $branch_details = Branch::whereIn('branch_id', [$branch_details->branch_id])->get();
-
         } else {
             $user_details = Role::where('name', 'Seller')->first()->users;
             $branch_details = Branch::where('status', '1')->get();
@@ -679,7 +706,7 @@ class OrderController extends Controller
             $query = $query->where('sellers.seller_id', $seller_info->seller_id);
         }
 
-        if($user->branch_staff == 1){
+        if ($user->branch_staff == 1) {
             $banch_id = $user->staff->branch->banch_id;
             $query = $query->whereIn('orders.pickup_branch_id', [$banch_id]);
         }

@@ -88,7 +88,8 @@
                                         class="form-control js-example-basic-single @error('district_id') is-invalid @enderror">
                                         <option value="" disabled selected>Select District</option>
                                         @foreach ($district_details as $district)
-                                            <option value="{{ $district->district_id }}" @if (old('district_id') == $district->district_id) {{ 'selected' }} @endif>
+                                            <option value="{{ $district->district_id }}"
+                                                @if (old('district_id') == $district->district_id) {{ 'selected' }} @endif>
                                                 {{ $district->district_name }}</option>
                                         @endforeach
                                     </select>
@@ -104,7 +105,8 @@
                                         class="form-control js-example-basic-single @error('city_id') is-invalid @enderror">
                                         <option value="" disabled selected>Select City</option>
                                         @foreach ($city_details as $city)
-                                            <option value="{{ $city->city_id }}" @if (old('city_id') == $city->city_id) {{ 'selected' }} @endif>
+                                            <option value="{{ $city->city_id }}"
+                                                @if (old('city_id') == $city->city_id) {{ 'selected' }} @endif>
                                                 {{ $city->city_name }}</option>
                                         @endforeach
                                     </select>
@@ -143,7 +145,8 @@
                                         class="form-control js-example-basic-single @error('pickup_branch_id') is-invalid @enderror">
                                         <option value="" disabled selected>Select Pickup Branch</option>
                                         @foreach ($branche_details as $branch)
-                                            <option value="{{ $branch->branch_id }}" @if (old('pickup_branch_id') == $branch->branch_id) {{ 'selected' }} @endif>
+                                            <option value="{{ $branch->branch_id }}"
+                                                @if (old('pickup_branch_id') == $branch->branch_id) {{ 'selected' }} @endif>
                                                 {{ $branch->branch_code }} - {{ $branch->branch_name }}</option>
                                         @endforeach
                                     </select>
@@ -171,27 +174,52 @@
                         <p>Add Bulk Orders (Upload Excel)</p>
                     </div>
                     <div class="card-body">
-                        <form action="" method="post">
+                        <form action="{{ route('create_bulk_order_post') }}" method="post" enctype="multipart/form-data">
+                            @csrf
                             <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <div class="alert alert-info" role="alert">
-                                        You can download sample format of excel sheet <a href="#">HERE</a>. Make sure the format
-                                        should be .xls or .xslx.
+                                @if (isset($errors) && $errors->any())
+                                    <div class="form-group col-md-12">
+                                        <div class="alert alert-danger">
+                                            @include('layouts.msg.msg-layout')
+                                        </div>
                                     </div>
-                                </div>
+                                @else
+                                    <div class="form-group col-md-12">
+                                        <div class="alert alert-info" role="alert">
+                                            You can download sample format of excel sheet <a href="#">HERE</a>. Make sure the
+                                            format
+                                            should be .xls or .xslx.
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-9">
                                     <label for="">Pickup Branch :</label>
-                                    <select name="" id="" class="form-control js-example-basic-single">
-                                        <option value="" disabled selected>Select...</option>
-                                        <option value="">Ambalantota</option>
+                                    <select name="bulk_pickup_branch_id" id=""
+                                        class="form-control js-example-basic-single @error('bulk_pickup_branch_id') is-invalid @enderror">
+                                        <option value="" disabled selected>Select Pickup Branch</option>
+                                        @foreach ($branche_details as $branch)
+                                            <option value="{{ $branch->branch_id }}"
+                                                @if (old('bulk_pickup_branch_id') == $branch->branch_id) {{ 'selected' }} @endif>
+                                                {{ $branch->branch_code }} - {{ $branch->branch_name }}</option>
+                                        @endforeach
                                     </select>
+                                    @error('bulk_pickup_branch_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="">Upload Excel</label>
-                                    <input type="file" class="form-control-file" name="" id="" placeholder="Upload file"
-                                        aria-describedby="fileHelpId">
+                                    <input type="file" class="form-control-file @error('select_file') is-invalid @enderror"
+                                        name="select_file" id="" placeholder="Upload file" aria-describedby="fileHelpId">
+                                    @error('select_file')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-row">
@@ -299,7 +327,8 @@
                 success: function(data) {
                     // console.log(data);
                     if (data.seller_details) {
-                        option = "<option selected value=" + data.seller_details.seller_id + ">" + data.seller_details.seller_name +
+                        option = "<option selected value=" + data.seller_details.seller_id + ">" + data
+                            .seller_details.seller_name +
                             "</option>";
 
                     } else {

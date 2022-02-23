@@ -47,6 +47,7 @@ Route::post('/waybill-reservation', [WaybillController::class, 'waybill_reservat
 
 Route::get('/create-order',[OrderController::class, 'create_order_get'])->name('create_order_get');
 Route::post('/create-order',[OrderController::class, 'create_order_post'])->name('create_order_post');
+Route::post('/bulk-create-order',[OrderController::class, 'create_bulk_order_post'])->name('create_bulk_order_post');
 
 Route::get('/my-orders',[OrderController::class, 'my_order_get'])->name('my-orders');
 Route::get('/data-table-my-orders',[OrderController::class, 'my_order_data_table'])->name('my_order_data_table');
