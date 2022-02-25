@@ -163,3 +163,8 @@ Route::get('/daily-deposite', function () {
 Route::get('/seller-invoice', function () {
     return view('/finance/seller-invoice');
 });
+
+// Barcode Layout
+Route::get('/barcode', function () {
+    return view('/order-management/barcode');
+});
