@@ -147,3 +147,21 @@ Route::get('/fail/return', function () {
 Route::get('/client-registration', function () {
     return view('/client-reg');
 });
+
+// Finance 
+Route::get('/daily-finance', function () {
+    return view('/finance/daily-finance');
+});
+
+Route::get('/daily-deposite', function () {
+    return view('/finance/daily-deposite');
+});
+
+Route::get('/seller-invoice', function () {
+    return view('/finance/seller-invoice');
+});
+
+// Barcode Layout
+Route::get('/barcode', function () {
+    return view('/order-management/barcode');
+});

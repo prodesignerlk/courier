@@ -130,6 +130,27 @@
             <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="#settings" role="button" aria-expanded="false"
                     aria-controls="emails">
+                    <i class="link-icon" data-feather="box"></i>
+                    <span class="link-title">Finance</span>
+                    <i class="link-arrow" data-feather="chevron-down"></i>
+                </a>
+                <div class="collapse" id="settings">
+                    <ul class="nav sub-menu">
+                        <li class="nav-item">
+                            <a href="/daily-finance" class="nav-link">Daily Finance</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/daily-deposite" class="nav-link">Daily Deposite</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/seller-invoice" class="nav-link">Seller's Invoice</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#settings" role="button" aria-expanded="false"
+                    aria-controls="emails">
                     <i class="link-icon" data-feather="mail"></i>
                     <span class="link-title">Settings</span>
                     <i class="link-arrow" data-feather="chevron-down"></i>
@@ -151,6 +172,7 @@
                     </ul>
                 </div>
             </li>
+
         </ul>
     </div>
 </nav>
