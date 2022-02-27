@@ -1,11 +1,3 @@
-@if(count($errors)>0)
-    @foreach($errors->all() as $error)
-    <div class="danger-alert" style="color:red;">
-        {{$error}}
-    </div>
-    @endforeach
-@endif
-
 @php
     if(Session::has('success')){
         toast(Session::get('success'), 'success')->timerProgressBar()->width('300px');
@@ -16,5 +8,13 @@
         toast(session::get('error'),session::get('error_type'))->timerProgressBar()->autoClose(7000);
         Session::forget('error');
         Session::forget('error_type');
+    }
+
+    if(Session::has('errors')){
+        // foreach($errors->all() as $error){
+            // toast($errors->all(),'warning')->timerProgressBar()->autoClose(7000);
+            // alert()->warning('Validation Error',$errors->all())->timerProgressBar()->autoClose(7000);
+        // }
+            Session::forget('errors');
     }
 @endphp

@@ -1,7 +1,6 @@
 @extends('layouts.dashboard.main')
 
 @section('content')
-
     <table class="table table-bordered" id="users-table">
         <thead>
             <tr>
@@ -21,7 +20,7 @@
             $('#users-table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('getuser')}}",
+                ajax: "{{ route('getuser') }}",
                 columns: [{
                         data: 'id',
                         name: 'id'
@@ -46,5 +45,4 @@
             });
         });
     </script>
-
 @endpush

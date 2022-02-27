@@ -132,20 +132,11 @@ class StatusChangeController extends Controller
             return response()->json(['response' => '0', 'msg' => $msg]);
         }
 
-        if($user->branch_staff == 1){
-            $branch_id = $user->staff->branch_id;
-            $order_details = $order_details->whereIn('pickup_branch_id', [$branch_id]);
-            
-            if(empty($order_details->first())){
-                $msg = 'Invalid waybill number!';
-                return response()->json(['response' => '0', 'msg' => $msg]);
-            }
-        }
-
         if(($order_details->first()->status != 3 && $order_details->first()->status != 11) || $order_details->first()->status == 4){
             $msg = 'Invalid/ Already maked waybill number!';
             return response()->json(['response' => '0', 'msg' => $msg]);
         }
+
         $ord = null;
         DB::transaction(function() use($order_details, $waybill_id, $weight, &$ord){
             $ord = $order_details->update([
@@ -173,7 +164,7 @@ class StatusChangeController extends Controller
     {
         /** @var User $user */
         $user = Auth::user();
-        $permission = $user->can('order-collected.mark');
+        $permission = $user->can('order-dispatch.mark');
 
         if (!$permission) {
             abort(403);
@@ -193,16 +184,6 @@ class StatusChangeController extends Controller
             return response()->json(['response' => '0', 'msg' => $msg]);
         }
 
-        if($user->branch_staff == 1){
-            $branch_id = $user->staff->branch_id;
-            $order_details = $order_details->whereIn('pickup_branch_id', [$branch_id]);
-            
-            if(empty($order_details->first())){
-                $msg = 'Invalid waybill number!';
-                return response()->json(['response' => '0', 'msg' => $msg]);
-            }
-        }
-
         if($order_details->first()->status != 4 || $order_details->first()->status == 5){
             $msg = 'Invalid/ Already maked waybill number!';
             return response()->json(['response' => '0', 'msg' => $msg]);
@@ -211,6 +192,56 @@ class StatusChangeController extends Controller
         DB::transaction(function() use($order_details, $branch_id){
             $order_details = $order_details->update([
                 'status' => 5,
+                'st_5_at' => date('Y-m-d H:i:s'),
+                'st_5_by' =>Auth::user()->id,
+                'branch_id' => $branch_id,
+            ]);
+
+        });
+        
+
+        return response()->json($order_details);
+    }
+
+    public function dis_received(Request $request)
+    {
+        /** @var User $user */
+        $user = Auth::user();
+        $permission = $user->can('order-received.mark');
+
+        if (!$permission) {
+            abort(403);
+        }
+
+        $waybill_id = request('waybill_id');
+        $order_details = Order::where('waybill_id', $waybill_id);
+
+        if(empty($order_details->first())){
+            $msg = 'Invalid waybill number!';
+            return response()->json(['response' => '0', 'msg' => $msg]);
+        }
+
+        if($user->branch_staff == 1){
+            $branch_id = $user->staff->branch_id;
+        //     $order_details = $order_details->whereIn('branch_id', [$branch_id]);
+            
+        //     if(empty($order_details->first())){
+        //         $msg = 'Invalid waybill number!';
+        //         return response()->json(['response' => '0', 'msg' => $msg]);
+        //     }
+        }else{
+            //not branch staff, order recived to relavent branch
+            $branch_id = $order_details->first()->branch_id;
+        }
+
+        if($order_details->first()->status != 5 || $order_details->first()->status == 6){
+            $msg = 'Invalid/ Already maked waybill number!';
+            return response()->json(['response' => '0', 'msg' => $msg]);
+        }
+        
+        DB::transaction(function() use($order_details, $branch_id){
+            $order_details = $order_details->update([
+                'status' => 6,
                 'st_5_at' => date('Y-m-d H:i:s'),
                 'st_5_by' =>Auth::user()->id,
                 'branch_id' => $branch_id,

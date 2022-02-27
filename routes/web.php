@@ -78,6 +78,15 @@ Route::get('/dis/dispatched-ord',[OrderController::class, 'dis_dispatched_orders
 Route::get('/dis/data-table-dispatched-orders',[OrderController::class, 'dis_dispatched_orders_data_table'])->name('dis_dispatched_orders_data_table');
 Route::post('/dis/dispatched-odr',[StatusChangeController::class, 'dis_dispatched'])->name('dis_dispatched');
 
+
+Route::get('/dis/to-be-receive',[OrderController::class, 'dis_to_be_receive_orders_get'])->name('dis_to_be_receive_orders_get');
+Route::get('/dis/data-table-receive-orders',[OrderController::class, 'dis_to_be_receive_orders_data_table'])->name('dis_to_be_receive_orders_data_table');
+
+Route::get('/dis/received-ord',[OrderController::class, 'dis_received_orders_get'])->name('dis_received_orders_get');
+Route::get('/dis/data-table-received-orders',[OrderController::class, 'dis_received_orders_data_table'])->name('dis_received_orders_data_table');
+Route::post('/dis/received-odr',[StatusChangeController::class, 'dis_received'])->name('dis_received');
+
+
 // Comman Ajax================================================================================================================================
 Route::post('/ajax/get-sellers-details', [SellerController::class, 'get_all_seller_details'])->name('get_seller_details');
 Route::post('/ajaz/get-package-details', [WaybillController::class, 'get_waybill_details'])->name('get_waybill_details');
@@ -97,18 +106,6 @@ Route::get('/default-settings', function () {return view('/settings/default-sett
 
 
 // Process Operation
-
-
-//distribute
-
-// To be Receive Packages 
-Route::get('/dis/to-be-receive', function () {
-    return view('/process/distribute/dis-to-be-receive');
-});
-// Received Packages 
-Route::get('/dis/received', function () {
-    return view('/process/distribute/dis-received');
-});
 
 // handover
 // Assign To Agent

@@ -113,7 +113,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="table-data">
+                            <table class="table table-bordered display" id="table-data" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th scope="col">Dispatched Date</th>
@@ -223,7 +223,7 @@
         </script>
     @endcan
 
-    @can('order-collected.mark')
+    @can('order-dispatched.mark')
         <script>
             $('document').ready(function() {
                 $('#scan_waybill').focus();

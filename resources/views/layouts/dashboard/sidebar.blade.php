@@ -89,10 +89,10 @@
                             <a href="{{ route('dis_dispatched_orders_get') }}" class="nav-link">Dispatch Orders</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/dis/to-be-receive" class="nav-link">To Be Receive Packages</a>
+                            <a href="{{ route('dis_to_be_receive_orders_get') }}" class="nav-link">To Be Receive Packages</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/dis/received" class="nav-link">Receive Orders</a>
+                            <a href="{{ route('dis_received_orders_get') }}" class="nav-link">Receive Orders</a>
                         </li>
                     </ul>
                     <span class="link-title">Handover</span>

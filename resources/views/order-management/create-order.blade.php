@@ -180,15 +180,15 @@
                                 @if (isset($errors) && $errors->any())
                                     <div class="form-group col-md-12">
                                         <div class="alert alert-danger">
-                                            @include('layouts.msg.msg-layout')
+                                            @include('layouts.msg.alert-msg')
                                         </div>
                                     </div>
                                 @else
                                     <div class="form-group col-md-12">
                                         <div class="alert alert-info" role="alert">
-                                            You can download sample format of excel sheet <a href="#">HERE</a>. Make sure the
-                                            format
-                                            should be .xls or .xslx.
+                                            You can download sample format of excel sheet <a
+                                                @if (Auth::user()->hasRole('Seller')) href="{{ url('seller_datasheet.xlsx') }}" @else href="{{ url('datasheet.xlsx') }}" @endif>HERE</a>.
+                                            Make sure the format should be .xls or .xslx.
                                         </div>
                                     </div>
                                 @endif

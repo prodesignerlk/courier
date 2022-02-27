@@ -89,7 +89,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="table-data">
+                            <table class="table table-bordered display" id="table-data" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th scope="col">Pickup Collected Date</th>

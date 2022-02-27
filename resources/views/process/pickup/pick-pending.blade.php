@@ -61,7 +61,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="pending-order">
+                        <table class="table table-bordered display" id="pending-order" style="width:100%">
                             <thead>
                                 <tr>
                                     <th scope="col">Order Date</th>

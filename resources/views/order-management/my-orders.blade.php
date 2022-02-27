@@ -72,7 +72,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="my-order-table">
+                            <table class="table table-bordered display" id="table-data" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th scope="col">Status Date</th>
