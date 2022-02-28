@@ -165,3 +165,20 @@ Route::get('/seller-invoice', function () {
 Route::get('/barcode', function () {
     return view('/order-management/barcode');
 });
+
+// login
+Route::get('/new-login', function () {
+    return view('/auth/new-login');
+});
+
+Route::get('/new-register', function () {
+    return view('/auth/new-register');
+});
+
+Route::get('/new-verify-contact', function () {
+    return view('/auth/new-verify-contact');
+});
+
+Route::get('/new-verify-email', function () {
+    return view('/auth/new-verify-email');
+});

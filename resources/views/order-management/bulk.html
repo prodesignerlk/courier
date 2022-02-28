@@ -1,0 +1,66 @@
+<div class="container">
+    @for ($j=0; $j < count($order_ids); $j=$j+4) {{-- @php dd(count($order_ids)); @endphp --}} <div
+        class="row mt-4">
+        @for ($i = $j; $i < ($j+4); $i++) @if(isset($order_ids[$i])) @php $order_details=DB::table('orders') ->
+            join('customers', 'customers.cus_id', '=', 'orders.cus_id')
+            ->join('packages', 'packages.waybill_id', '=', 'orders.waybill_id')
+            ->join('clients', 'clients.client_id', '=', 'orders.client_id')
+            ->select('customers.*', 'clients.*', 'packages.*', 'orders.st_1_at','orders.ord_description',
+            'orders.COD_Amount')
+            ->where([['orders.order_id', $order_ids[$i]]])
+            ->orderByDesc('orders.order_id')
+            ->get();
+
+            // dd($order_details);
+            @endphp
+
+            @foreach ( $order_details as $order )
+
+            <div class="col-md-6">
+                <table class="table table-bordered text-center">
+                    <tbody>
+                        <tr>
+                            <td style="width: 180px;"><img src="{{ url('logo.png') }}" alt="Quick Delivery Service"
+                                    style="width:150px; height:30px;"></td>
+                            <td><b style="font-size: 9px;">WayBill Number</b> <br> {{ $order->waybill_id }}</td>
+                            <td><b style="font-size: 9px;">Date</b><br> @php echo date("Y-m-d",
+                                strtotime($order->st_1_at)); @endphp</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-center">@php $waybill_now = $order->waybill_id; echo
+                                DNS1D::getBarcodeHTML("$waybill_now", 'C128A',3,100,'black',true); @endphp</td>
+                        </tr>
+                        <tr>
+                            <td>@php $cus_address = $order->cus_name.', '.$order->cus_address.', '.$order->cus_tp.'
+                                ,'.$order->COD_Amount.' LKR';
+                                echo DNS2D::getBarcodeHTML("$cus_address", 'QRCODE', 3,3); @endphp
+                            </td>
+                            <td class="text-left" colspan="2"><b>Recipient :</b>{{ $order->cus_name }}, {{
+                                $order->cus_address }} <br> {{ $order->cus_tp }}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left" colspan="3"><b>Seller :</b>{{ $order->user_name }}, {{
+                                $order->client_address }} <br> {{ $order->client_tp }}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left" colspan="3"><b>COD Amount :</b> {{$order->COD_Amount}} LKR</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left" colspan="3"><b>Package weight:</b> {{ $order->weight }}</td>
+                        </tr>
+                        @if ($order->ord_description != null)
+                        <tr>
+                            <td colspan="3" class="text-left"><b>Package Description:</b> {{ $order->ord_description
+                                }}</td>
+                        </tr>
+                        @endif
+                    </tbody>
+                </table>
+            </div>
+
+            @endforeach
+            @endif
+            @endfor
+</div>
+<div class="pagebreak"></div>
+</div>
