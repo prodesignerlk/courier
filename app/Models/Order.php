@@ -16,6 +16,7 @@ class Order extends Model
     protected $fillable = [
         'cod_amount',
         'delivery_cost',
+        'net_price',
         'remark',
         'status',
         'st_1_at',
@@ -30,6 +31,7 @@ class Order extends Model
         'st_5_by',
         'st_6_at',
         'st_6_by',
+        'st_6_branch',
         'st_9_at',
         'st_9_bt',
         'st_10_at',
@@ -47,6 +49,8 @@ class Order extends Model
         'seller_id',
         'pickup_branch_id',
         'branch_id',
+        'invoice_id',
+        'branch_finance_id',
     ];
 
     public function seller()
@@ -67,5 +71,15 @@ class Order extends Model
     public function package()
     {
         return $this->belongsTo(Package::class, 'waybill_id', 'waybill_id');
+    }
+
+    public function assign_to_agent()
+    {
+        return $this->hasMany(AssignToAgent::class, 'order_id');
+    }
+
+    public function reschedule()
+    {
+        return $this->hasMany(Reschedule::class, 'order_id');
     }
 }

@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\InvoiceFail;
+use App\Models\Order;
+use App\Models\Seller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 use Yajra\Datatables\Datatables;
 
 class HomeController extends Controller

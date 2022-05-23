@@ -18,6 +18,9 @@ class CreateAssignToAgentsTable extends Migration
 
             $table->dateTime('assign_date');
 
+            $table->unsignedBigInteger('staff_id');//rider
+            $table->foreign('staff_id')->references('staff_id')->on('staff');
+
             $table->unsignedBigInteger('order_id');
             $table->foreign('order_id')->references('order_id')->on('orders');
 
@@ -25,6 +28,9 @@ class CreateAssignToAgentsTable extends Migration
             $table->foreign('assign_by')->references('id')->on('users');
 
             $table->dateTime('assign_at');
+
+            //to check final one. final --->>> 1 , All others --->>> 0
+            $table->boolean('status')->default('1');
             
             $table->timestamps();
         });

@@ -26,11 +26,16 @@ class Branch extends Model
 
     public function order()
     {
-        return $this->hasMany(Order::class,'branch_id');
+        return $this->hasMany(Order::class, 'branch_id');
     }
 
     public function staff()
     {
         return $this->hasMany(Staff::class, 'branch_id');
+    }
+
+    public function daily_finance()
+    {
+        return $this->hasMany(DailyFinance::class, 'branch_id');
     }
 }

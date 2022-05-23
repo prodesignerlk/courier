@@ -96,8 +96,8 @@
                                         <th scope="col">Store Name</th>
                                         {{-- <th scope="col">Seller Name</th> --}}
                                     @endif
-                                    <th scope="col">To</th>
                                     <th scope="col">From</th>
+                                    <th scope="col">To</th>
                                     <th scope="col">Unused Qty</th>
                                 </tr>
                             </thead>

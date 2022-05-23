@@ -32,4 +32,9 @@ class Staff extends Model
     {
         return $this->belongsTo(Branch::class, 'branch_id');
     }
+
+    public function assign_to_agent()
+    {
+        return $this->hasMany(AssignToAgent::class, 'staff_id');
+    }
 }

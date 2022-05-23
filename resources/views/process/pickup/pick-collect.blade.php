@@ -4,7 +4,7 @@
     @php
         $user = Auth::user();
     @endphp
-    
+
     @can('pickup-collected.mark')
         <div class="form-row">
             <div class="col-md-12">
@@ -49,7 +49,7 @@
                             <div class="form-group col-md-3">
                                 <label for="">Branch :</label>
                                 <select name="branch_id" id="branch_id" class="form-control js-example-basic-single">
-                                    <option value="null" selected disabled>All Branches</option>
+                                    <option value="">All Branches</option>
                                     @foreach ($branch_details as $branch)
                                         <option value="{{ $branch->branch_id }}">{{ $branch->branch_code }} -
                                             {{ $branch->branch_name }}</option>
@@ -59,7 +59,7 @@
                             <div class="form-group col-md-3">
                                 <label for="">Seller :</label>
                                 <select name="seller_id" id="seller_id" class="form-control js-example-basic-single">
-                                    <option value="null" selected disabled>All Sellers</option>
+                                    <option value="">All Sellers</option>
                                     @foreach ($user_details as $user)
                                         @php
                                             $seller = $user->seller;
@@ -186,13 +186,13 @@
             };
 
             $('#filter').click(function() {
-                var from_date = $('#date_from').val();
-                var to_date = $('#date_to').val();
-                var branch_id = $('#branch_id').val();
-                var seller_id = $('#seller_id').val();
+                let from_date = $('#date_from').val();
+                let to_date = $('#date_to').val();
+                let branch_id = $('#branch_id').val();
+                let seller_id = $('#seller_id').val();
 
                 $('#table-data').DataTable().destroy();
-                load_data(from_date, to_date, status, branch_id, seller_id);
+                load_data(from_date, to_date, branch_id, seller_id);
 
             });
         </script>

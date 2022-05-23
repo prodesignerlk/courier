@@ -13,12 +13,26 @@
                     </div>
                     <div class="card-body action-body">
                         <div class="form-row">
-                            <div class="form-group col-md-8">
+                            <div class="form-group col-md-4">
                                 <label for="">Waybill Id</label>
                                 <input type="text" name="" id="scan_waybill" class="form-control">
                             </div>
+                            <div class="form-group col-md-3">
+                                <label for="">Branch :</label>
+                                <select name="" id="branch_id" class="form-control js-example-basic-single" required>
+                                    @if (!$user->hasRole('Seller'))
+                                        <option value="null" selected disabled>Select Branches</option>
+                                    @endif
+
+                                    @foreach ($branch_details as $branch)
+                                        <option value="{{ $branch->branch_id }}">{{ $branch->branch_code }} -
+                                            {{ $branch->branch_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="form-group col-md-4">
-                                <button type="submit" class="btn btn-primary btn-block" id="btn-submit">Mark as Received</button>
+                                <button type="submit" class="btn btn-primary btn-block" id="btn-submit">Mark as
+                                    Received</button>
                             </div>
                         </div>
                     </div>
@@ -48,7 +62,7 @@
                             <div class="form-group col-md-3">
                                 <label for="">Branch :</label>
                                 <select name="branch_id" id="branch_id" class="form-control js-example-basic-single">
-                                    <option value="null" selected disabled>All Branches</option>
+                                    <option value="">All Branches</option>
                                     @foreach ($branch_details as $branch)
                                         <option value="{{ $branch->branch_id }}">{{ $branch->branch_code }} -
                                             {{ $branch->branch_name }}</option>
@@ -58,7 +72,7 @@
                             <div class="form-group col-md-3">
                                 <label for="">Seller :</label>
                                 <select name="seller_id" id="seller_id" class="form-control js-example-basic-single">
-                                    <option value="null" selected disabled>All Sellers</option>
+                                    <option value="">All Sellers</option>
                                     @foreach ($user_details as $user)
                                         @php
                                             $seller = $user->seller;
@@ -89,6 +103,7 @@
                         <p>Received Packages </p>
                     </div>
                     <div class="card-body">
+                        <small><i>Yellow colour indictes the missing orders.</i></small>
                         <div class="table-responsive">
                             <table class="table table-bordered display" id="table-data" style="width:100%">
                                 <thead>
@@ -143,8 +158,8 @@
                         }
                     },
                     columns: [{
-                            data: 'st_5_at',
-                            name: 'st_5_at'
+                            data: 'st_6_at',
+                            name: 'st_6_at'
                         },
                         {
                             data: 'waybill_id',
@@ -187,13 +202,13 @@
             };
 
             $('#filter').click(function() {
-                var from_date = $('#date_from').val();
-                var to_date = $('#date_to').val();
-                var branch_id = $('#branch_id').val();
-                var seller_id = $('#seller_id').val();
+                let from_date = $('#date_from').val();
+                let to_date = $('#date_to').val();
+                let branch_id = $('#branch_id').val();
+                let seller_id = $('#seller_id').val();
 
                 $('#table-data').DataTable().destroy();
-                load_data(from_date, to_date, status, branch_id, seller_id);
+                load_data(from_date, to_date, branch_id, seller_id);
 
             });
         </script>
@@ -211,12 +226,14 @@
 
             function received() {
                 let waybill = $('#scan_waybill').val();
+                let branch_id = $('#branch_id').val();
 
                 $.ajax({
                     url: '{{ route('dis_received') }}',
                     method: 'post',
                     data: {
                         waybill_id: waybill,
+                        branch_id: branch_id,
                         _token: "{{ csrf_token() }}",
                     },
                     dataType: 'json',

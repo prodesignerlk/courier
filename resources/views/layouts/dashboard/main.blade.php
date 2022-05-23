@@ -21,8 +21,11 @@
     <link rel="stylesheet" href="{{ url('assets/vendors/sweetalert2/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
     <script src="{{ url('assets/vendors/core/core.js') }}"></script>
-    
+
+
     <link rel="shortcut icon" href="{{ url('assets/images/favicon.png') }}" />
     <link rel="stylesheet" href="{{ url('assets/css/validation/validation.css') }}">
     <link rel="stylesheet" href="{{ url('assets/css/main.css') }}">
@@ -157,8 +160,8 @@
 
             </div>
             <footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between">
-                <p class="text-muted text-center text-md-left">Copyright © 2021 <a href="https://www.prodesigner.lk"
-                        target="_blank">PRODESIGNER.LK (PVT) LTD</a>. All rights reserved</p>
+                <p class="text-muted text-center text-md-left">Copyright © 2022 <a href="https://www.prodesigner.lk"
+                        target="_blank">COURIER PRO</a>. All rights reserved</p>
                 <p class="text-muted text-center text-md-left mb-0 d-none d-md-block">v{{ env('APP_VERSION') }}</p>
             </footer>
         </div>
@@ -207,17 +210,20 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
 
     @stack('scripts')
 </body>
 <script>
     $('document').ready(function(){
         $('.search-body').slideUp();
-        $('.search-header').click(function () { 
+        $('.search-header').click(function () {
             $('.search-body').slideToggle();
             $('.action-body').slideToggle();
         });
-        $('.action-header').click(function () { 
+        $('.action-header').click(function () {
             $('.search-body').slideToggle();
             $('.action-body').slideToggle();
         });
@@ -240,6 +246,11 @@
         ],
     });
 
+    /**
+     *
+     * @param type
+     * @param msg
+     */
     function notify(type, msg) {
         Swal.fire({
             toast: true,

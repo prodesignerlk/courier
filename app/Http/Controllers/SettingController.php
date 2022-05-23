@@ -7,7 +7,6 @@ use App\Models\WaybillOption;
 use App\Models\WaybillType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Throwable;
 use Yajra\DataTables\Facades\DataTables;
 
 class SettingController extends Controller
@@ -77,7 +76,7 @@ class SettingController extends Controller
         if (!$permission) {
             abort(403);
         }
-        
+
         return Datatables::of(WaybillType::query())->make(true);
 
     }
@@ -92,10 +91,10 @@ class SettingController extends Controller
             Auth::logout();
             abort(403);
         }
-        
+
         $waybill_type_id = request('wayabill_type');
         $waybill_details = WaybillOption::find($waybill_type_id)->description;
-        
+
         return response()->json($waybill_details);
     }
 
@@ -109,12 +108,12 @@ class SettingController extends Controller
             Auth::logout();
             abort(403);
         }
-        
+
         $waybill_type_id = request('wayabill_type');
             $waybill_option = Setting::where('feature', 'waybill_option')->update([
                 'option' => $waybill_type_id,
             ]);
-        
+
             return response()->json($waybill_option);
     }
 }

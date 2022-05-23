@@ -30,7 +30,7 @@ class CreateSellersTable extends Migration
             $table->integer('payment_period');
             $table->integer('regular_price');
             $table->integer('extra_price');
-            $table->integer('handeling_fee');
+            $table->integer('handling_fee');
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Seller;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->id('order_id');
             $table->float('cod_amount');
             $table->float('delivery_cost')->nullable();
+            $table->float('net_price')->nullable();
             $table->text('remark')->nullable();
             $table->unsignedBigInteger('status')->default('1');
 
@@ -52,6 +54,7 @@ class CreateOrdersTable extends Migration
 
             $table->dateTime('st_6_at')->nullable();
             $table->unsignedBigInteger('st_6_by')->nullable();
+            $table->unsignedBigInteger('st_6_branch')->nullable(); //received branch
 
             // $table->unsignedBigInteger('assign_to_agent_id');
             // $table->foreign('assign_to_agent_id')->references('assign_to_agent_id')->on('assign_to_agents');      
@@ -64,6 +67,7 @@ class CreateOrdersTable extends Migration
 
             $table->dateTime('st_10_at')->nullable();
             $table->unsignedBigInteger('st_10_by')->nullable();
+            $table->unsignedBigInteger('st_10_reason')->nullable();
 
             $table->dateTime('st_11_at')->nullable();
             $table->unsignedBigInteger('st_11_by')->nullable();
@@ -88,6 +92,10 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('pickup_branch_id');
 
             $table->unsignedBigInteger('branch_id')->nullable();
+
+            $table->unsignedBigInteger('invoice_id')->nullable();
+
+            $table->unsignedBigInteger('branch_finance_id')->nullable();
 
             // $table->unsignedBigInteger('daily_invoice_id')->nullable();
 

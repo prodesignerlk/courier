@@ -23,23 +23,23 @@ class Seller extends Model
         'payment_period',
         'regular_price',
         'extra_price',
-        'handeling_fee',
+        'handling_fee',
         'user_id',
     ];
 
-    public function package()
+    public function package(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Package::class, 'seller_id');
     }
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function order()
+    public function order(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Order::class, 'seller_id');
     }
-    
+
 }

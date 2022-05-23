@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
+
 
 class SellerController extends Controller
 {
@@ -12,6 +13,7 @@ class SellerController extends Controller
     {
         $this->middleware(['auth']);
     }
+
 
     public function get_all_seller_details()
     {
@@ -26,4 +28,5 @@ class SellerController extends Controller
 
         return response()->json($seller_details);
     }
+
 }

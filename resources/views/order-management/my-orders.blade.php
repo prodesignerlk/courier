@@ -207,11 +207,11 @@
         };
 
         $('#filter').click(function() {
-            var from_date = $('#date_from').val();
-            var to_date = $('#date_to').val();
-            var status = $('#status').val();
-            var branch_id = $('#branch_id').val();
-            var seller_id = $('#seller_id').val();
+            let from_date = $('#date_from').val();
+            let to_date = $('#date_to').val();
+            let status = $('#status').val();
+            let branch_id = $('#branch_id').val();
+            let seller_id = $('#seller_id').val();
 
             console.log(status);
             $('#my-order-table').DataTable().destroy();

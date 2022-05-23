@@ -9,14 +9,22 @@ class Reschedule extends Model
 {
     use HasFactory;
 
-    protected $table = 'sellers';
+    protected $table = 'reschedules';
 
-    protected $primaryKey = 'seller_id';
+    protected $primaryKey = 'reschedule_id';
 
     protected $fillable = [
-        'reschedule_reson',
+        'reschedule_date',
+        'reason_id',
         'order_id',
+        'status',
+        'reassign',
         'reschedule_by',
         'reschedule_at',
     ];
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class, 'order_id');
+    }
 }

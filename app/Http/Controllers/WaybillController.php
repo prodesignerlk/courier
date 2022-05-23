@@ -77,7 +77,7 @@ class WaybillController extends Controller
 
         $seller_id = Seller::where('user_id', request('user_id'))->first()->seller_id;
 
-        if($waybill_type == 'No Prifix'){
+        if($waybill_type == 'No Prefix'){
             try {
                 DB::transaction(function () use ($final_bach_no, $seller_id, $waybill_type) {
                     for ($i = request('reserve_from'); $i <= request('reserve_to'); $i++) {

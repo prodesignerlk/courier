@@ -22,7 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'branch_staff'
+        'branch_staff',
+        'user_status',
     ];
 
     /**
@@ -44,12 +45,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function seller()
+    public function seller(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(Seller::class, 'user_id', 'id');
     }
 
-    public function staff()
+    public function staff(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(Staff::class, 'user_id', 'id');
     }

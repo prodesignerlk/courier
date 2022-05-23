@@ -42,9 +42,9 @@ class PermissionSeeder extends Seeder
             
         }
 
-        // //permission
+        //permission
         // $permissions = [
-        //     'Agent1' => ['role' => 'Agent', 'permission' => 'agent.create'],
+        //     'Seller' => ['role' => 'Seller', 'permission' => 'waybill-reservation.view'],
         // ];
 
         // foreach($permissions as $per){

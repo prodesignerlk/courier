@@ -15,9 +15,20 @@ class AssignToAgent extends Model
 
     protected $fillable = [
         'assign_date',
+        'staff_id',
         'order_id',
-        'agent_id',
+        'status',
         'assign_by',
         'assign_at',
     ];
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class, 'order_id');
+    }
+
+    public function staff()
+    {
+        return $this->belongsTo(Staff::class, 'staff_id');
+    }
 }

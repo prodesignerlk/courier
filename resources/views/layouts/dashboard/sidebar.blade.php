@@ -38,7 +38,7 @@
                             }else{
                                 $waybill_option = 'null';
                             }
-                            
+
                         @endphp
                         @if ($waybill_option != null && ($waybill_option->option == 'Manual Range' || $waybill_option->option == 'Manual Qnt'))
                             @can('waybill-reservation.view')
@@ -98,31 +98,31 @@
                     <span class="link-title">Handover</span>
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="/hand/assign-to-agent" class="nav-link">Assign to Agent</a>
+                            <a href="{{ route('hand_assign_to_agent_orders_get') }}" class="nav-link">Assign to Agent</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/hand/deliverd" class="nav-link">Delivered</a>
+                            <a href="{{ route('hand_delivered_orders_get') }}" class="nav-link">Delivered</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/hand/reshedule" class="nav-link">Re-Schedule</a>
+                            <a href="{{ route('hand_reschedule_orders_get') }}" class="nav-link">Re-Schedule</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/hand/fails" class="nav-link">Deliver Fails </a>
+                            <a href="{{ route('hand_deliver_fail_orders_get') }}" class="nav-link">Deliver Fails </a>
                         </li>
                     </ul>
                     <span class="link-title">Fails</span>
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="/fail/mis-route" class="nav-link">Mis-Routs</a>
+                            <a href="{{ route('hand_miss_route_orders_get') }}" class="nav-link">Mis-Routs</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/fail/re-route" class="nav-link">Re-route</a>
+                            <a href="{{ route('fail_re_route_orders_get') }}" class="nav-link">Re-route</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/fail/received-ho" class="nav-link">Received by HO</a>
+                            <a href="/fail/received-ho" class="nav-link">Received by HO (Return)</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/fail/return" class="nav-link">Return to Client </a>
+                            <a href="/fail/return" class="nav-link">Return to Client (Return)</a>
                         </li>
                     </ul>
                 </div>
@@ -137,13 +137,13 @@
                 <div class="collapse" id="settings">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="/daily-finance" class="nav-link">Daily Finance</a>
+                            <a href="{{route('daily_finance')}}" class="nav-link">Daily Finance</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/daily-deposite" class="nav-link">Daily Deposite</a>
+                            <a href="{{route('daily_Deposit_get')}}" class="nav-link">Daily Deposite</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/seller-invoice" class="nav-link">Seller's Invoice</a>
+                            <a href="{{route('seller_invoice')}}" class="nav-link">Seller's Invoice</a>
                         </li>
                     </ul>
                 </div>

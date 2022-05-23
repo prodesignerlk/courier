@@ -86,12 +86,52 @@ Route::get('/dis/received-ord',[OrderController::class, 'dis_received_orders_get
 Route::get('/dis/data-table-received-orders',[OrderController::class, 'dis_received_orders_data_table'])->name('dis_received_orders_data_table');
 Route::post('/dis/received-odr',[StatusChangeController::class, 'dis_received'])->name('dis_received');
 
+//handle
+Route::get('/hand/assign-to-agent-ord',[OrderController::class, 'hand_assign_to_agent_orders_get'])->name('hand_assign_to_agent_orders_get');
+Route::get('/hand/data-table-assign-to-agent-orders',[OrderController::class, 'hand_assign_to_agent_orders_data_table'])->name('hand_assign_to_agent_orders_data_table');
+Route::post('/hand/assign-to-agent-odr',[StatusChangeController::class, 'hand_assign_to_agent'])->name('hand_assign_to_agent');
 
-// Comman Ajax================================================================================================================================
+Route::get('/hand/deliverd-ord',[OrderController::class, 'hand_delivered_orders_get'])->name('hand_delivered_orders_get');
+Route::get('/hand/data-table-deliverd-orders',[OrderController::class, 'hand_delivered_orders_data_table'])->name('hand_delivered_orders_data_table');
+Route::post('/hand/deliverd-odr',[StatusChangeController::class, 'hand_delivered'])->name('hand_delivered');
+
+Route::get('/hand/reschedule-ord',[OrderController::class, 'hand_reschedule_orders_get'])->name('hand_reschedule_orders_get');
+Route::get('/hand/data-table-reschedule-orders',[OrderController::class, 'hand_reschedule_orders_data_table'])->name('hand_reschedule_orders_data_table');
+Route::post('/hand/reschedule-odr',[StatusChangeController::class, 'hand_reschedule'])->name('hand_reschedule');
+
+Route::get('/hand/deliver-fail-ord',[OrderController::class, 'hand_deliver_fail_orders_get'])->name('hand_deliver_fail_orders_get');
+Route::get('/hand/data-table-deliver-fail-orders',[OrderController::class, 'hand_deliver_fail_orders_data_table'])->name('hand_deliver_fail_orders_data_table');
+Route::post('/hand/deliver-fail-odr',[StatusChangeController::class, 'hand_deliver_fail'])->name('hand_deliver_fail');
+
+//Fail
+Route::get('/hand/miss-route',[OrderController::class, 'hand_miss_route_orders_get'])->name('hand_miss_route_orders_get');
+Route::get('/hand/data-table-miss-route',[OrderController::class, 'hand_miss_route_data_table'])->name('hand_miss_route_data_table');
+
+Route::get('/fail/re-route-ord',[OrderController::class, 'fail_re_route_orders_get'])->name('fail_re_route_orders_get');
+Route::get('/fail/data-table-re-route-orders',[OrderController::class, 'fail_re_route_orders_data_table'])->name('fail_re_route_orders_data_table');
+Route::post('/fail/re-route-odr',[StatusChangeController::class, 'fail_re_route'])->name('fail_re_route');
+
+
+/**
+ * Finance
+ */
+//seller invoice
+Route::get('/seller-invoice', [\App\Http\Controllers\FinanceController::class, 'seller_invoice'])->name('seller_invoice');
+Route::get('/invoice/data-table-seller-invoice',[\App\Http\Controllers\FinanceController::class, 'seller_invoice_data_table'])->name('seller_invoice_data_table');
+
+//daily branch invoice
+Route::get('/finance/daily-finance', [\App\Http\Controllers\FinanceController::class, 'daily_finance'])->name('daily_finance');
+Route::get('/finance/daily/data-table-daily-finance',[\App\Http\Controllers\FinanceController::class, 'daily_finance_data_table'])->name('daily_finance_data_table');
+Route::post('/finance/daily/branch-daily-invoice',[\App\Http\Controllers\FinanceController::class, 'daily_finance_deposit'])->name('daily_finance_deposit');
+
+Route::get('/finance/daily-deposit', [\App\Http\Controllers\FinanceController::class, 'daily_Deposit_get'])->name('daily_Deposit_get');
+Route::get('/finance/data-table-daily-deposit', [\App\Http\Controllers\FinanceController::class, 'daily_deposit_data_table'])->name('daily_deposit_data_table');
+Route::post('/finance/make-payment-confirm', [\App\Http\Controllers\FinanceController::class, 'confirm_deposit'])->name('confirm_deposit');
+
+// Common Ajax================================================================================================================================
 Route::post('/ajax/get-sellers-details', [SellerController::class, 'get_all_seller_details'])->name('get_seller_details');
 Route::post('/ajaz/get-package-details', [WaybillController::class, 'get_waybill_details'])->name('get_waybill_details');
 Route::post('/ajaz/get-district-city', [DistrictCityController::class, 'districts_city'])->name('districts_city');
-
 
 
 //logout
@@ -103,63 +143,21 @@ Route::get('/general-settings', function () {return view('/settings/general');})
 Route::get('/default-settings', function () {return view('/settings/default-settings');})->name('default-settings');
 
 
-
-
-// Process Operation
-
-// handover
-// Assign To Agent
-Route::get('/hand/assign-to-agent', function () {
-    return view('/process/handover/hand-assign-to-agent');
-});
-// deliverd order
-Route::get('/hand/deliverd', function () {
-    return view('/process/handover/hand-deliverd');
-});
-// reschedule
-Route::get('/hand/reshedule', function () {
-    return view('/process/handover/hand-reshedule');
-});
-// deliver fails
-Route::get('/hand/fails', function () {
-    return view('/process/handover/hand-fails');
-});
-
-// Fails 
-// mis-route
-Route::get('/fail/mis-route', function () {
-    return view('/process/fail/fail-mis-route');
-});
-// re-route
-Route::get('/fail/re-route', function () {
-    return view('/process/fail/fail-re-route');
-});
-// HO (Returns) 
+// HO (Returns)
 Route::get('/fail/received-ho', function () {
     return view('/process/fail/fail-received-ho');
 });
-// Return to Client 
+// Return to Client
 Route::get('/fail/return', function () {
     return view('/process/fail/fail-return');
 });
 
-// Return to Client 
+// Return to Client
 Route::get('/client-registration', function () {
     return view('/client-reg');
 });
 
-// Finance 
-Route::get('/daily-finance', function () {
-    return view('/finance/daily-finance');
-});
-
-Route::get('/daily-deposite', function () {
-    return view('/finance/daily-deposite');
-});
-
-Route::get('/seller-invoice', function () {
-    return view('/finance/seller-invoice');
-});
+// Finance
 
 // Barcode Layout
 Route::get('/barcode', function () {

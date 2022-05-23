@@ -49,21 +49,19 @@
                         <hr>
                         <form id="user_data_form">
                             <div class="form-row">
-                                <div class="form-group col-md-8">
+                                <div class="form-group col-md-3">
                                     <label for="">Seller Name</label>
                                     <input type="text" name="" id="seller_name" class="form-control" readonly>
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-3">
                                     <label for="">Amount (LKR)</label>
                                     <input type="text" name="" id="cod" class="form-control" readonly>
                                 </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-3">
                                     <label for="">Destination</label>
                                     <input type="text" name="" id="destination" class="form-control" readonly>
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-3">
                                     <label for="">Remark</label>
                                     <input type="text" name="" id="remark" class="form-control" readonly>
                                 </div>
@@ -92,10 +90,10 @@
                                         <input type="date" name="date_to" id="date_to" class="form-control">
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label for="">Branch :</label>
+                                        <label for="">Pick-up Branch :</label>
                                         <select name="branch_id" id="branch_id"
                                             class="form-control js-example-basic-single">
-                                            <option value="null" selected disabled>All Branches</option>
+                                            <option value="">All Branches</option>
                                             @foreach ($branch_details as $branch)
                                                 <option value="{{ $branch->branch_id }}">{{ $branch->branch_code }} -
                                                     {{ $branch->branch_name }}</option>
@@ -106,7 +104,7 @@
                                         <label for="">Seller :</label>
                                         <select name="seller_id" id="seller_id"
                                             class="form-control js-example-basic-single">
-                                            <option value="null" selected disabled>All Sellers</option>
+                                            <option value="">All Sellers</option>
                                             @foreach ($user_details as $user)
                                                 @php
                                                     $seller = $user->seller;
@@ -143,6 +141,7 @@
                                             <th scope="col">Collected Date</th>
                                             <th scope="col">Waybill ID</th>
                                             <th scope="col">Pickup Branch</th>
+                                            <th scope="col">Weight (Kg)</th>
                                             <th scope="col">Seller</th>
                                             <th scope="col">Receiver</th>
                                             <th scope="col">Delivery Address</th>
@@ -203,6 +202,10 @@
                             name: 'pickup_branch'
                         },
                         {
+                            data: 'package_weight',
+                            name: 'package_weight'
+                        },
+                        {
                             data: 'seller_name',
                             name: 'seller_name'
                         },
@@ -235,13 +238,13 @@
             };
 
             $('#filter').click(function() {
-                var from_date = $('#date_from').val();
-                var to_date = $('#date_to').val();
-                var branch_id = $('#branch_id').val();
-                var seller_id = $('#seller_id').val();
+                let from_date = $('#date_from').val();
+                let to_date = $('#date_to').val();
+                let branch_id = $('#branch_id').val();
+                let seller_id = $('#seller_id').val();
 
                 $('#table-data').DataTable().destroy();
-                load_data(from_date, to_date, status, branch_id, seller_id);
+                load_data(from_date, to_date, branch_id, seller_id);
 
             });
         </script>
