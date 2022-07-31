@@ -6,6 +6,10 @@ use App\Models\Branch;
 use App\Models\DailyDeposit;
 use App\Models\DailyFinance;
 use App\Models\Seller;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +25,7 @@ class FinanceController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      * Seller Side invoice
      */
     public function seller_invoice()
@@ -46,6 +50,7 @@ class FinanceController extends Controller
         return view('finance.seller-invoice')->with(['user_details' => $user_details]);
 
     }
+
 
     /**
      * @param Request $request
@@ -227,9 +232,9 @@ class FinanceController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function daily_finance_deposit(Request $request): \Illuminate\Http\JsonResponse
+    public function daily_finance_deposit(Request $request): JsonResponse
     {
         $branch_id = request('branch_id');
         $amount = request('amount');
@@ -369,7 +374,8 @@ class FinanceController extends Controller
             ->make(true);
     }
 
-    public function confirm_deposit(Request $request){
+    public function confirm_deposit(Request $request): JsonResponse
+    {
         /** @var User $user */
         $user = Auth::user();
         $permission = $user->can('daily-deposit.confirm');

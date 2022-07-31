@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Bank;
 use App\Models\Seller;
 use App\Models\Staff;
 use App\Models\User;
@@ -19,14 +20,6 @@ class UserSeeder extends Seeder
     {
         $users = [
             'Sangeeth' => ['name' => 'Sangeeth Fernando', 'email' => 'sangeeth@qds.lk', 'password' => 'password', 'model' => 'Super Admin', 'branch_staff' => '0'],
-
-            'Isuru' => ['name' => 'Isuru Fernando', 'email' => 'isuru@qds.lk', 'password' => 'password', 'model' => 'Seller',
-                        'store_name' => 'Isuru Super', 'tp1' => '0717122252', 'address' => '66/5, Kalawana', 'city' => '184', 'district' => '14',
-                        'payment_period' => '7', 'regular_price' => '280', 'extra_price' => '80', 'handling_fee' => '1', 'branch_staff' => '0'],
-
-            'Rashmika' => ['name' => 'Rashmika Fernando', 'email' => 'rashmika@qds.lk', 'password' => 'password', 'model' => 'Staff',
-                        'staff_position' => 'Rider', 'staff_nic' => '9785684542V', 'staff_address' => '66/5, Kandy Rd, Haputhale',
-                        'staff_contact_1' => '0717155565', 'staff_contact_2' => '0452255458', 'branch_id' => '1', 'branch_staff' => '1']
         ];
 
         foreach($users as $user){
@@ -39,7 +32,7 @@ class UserSeeder extends Seeder
             ]);
 
             if($user['model'] == 'Seller'){
-                Seller::create([
+                $sellerInfo = Seller::create([
                     'seller_name' => $user['store_name'],
                     'seller_tp_1' => $user['tp1'],
                     'address_line_1' => $user['address'],
@@ -50,6 +43,13 @@ class UserSeeder extends Seeder
                     'extra_price' => $user['extra_price'],
                     'handling_fee' => $user['handling_fee'],
                     'user_id' => $user_info->id,
+                ]);
+
+                Bank::create([
+                    'bank_name' => $user['bank_name'],
+                    'branch_name' => $user['bank_branch'],
+                    'account_no' => $user['account_no'],
+                    'seller_id' => $sellerInfo->seller_id
                 ]);
             }
 
@@ -68,11 +68,5 @@ class UserSeeder extends Seeder
 
         $user = User::find(1);
         $user->assignRole('Super Admin');
-
-        $user = User::find(2);
-        $user->assignRole('Seller');
-
-        $user = User::find(3);
-        $user->assignRole('Rider');
     }
 }

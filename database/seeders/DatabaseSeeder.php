@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             DistrictSeeder::class,
             CitySeeder::class,
-            PermissionSeeder::class,
             RoleSeeder::class,
+            PermissionSeeder::class,
             UserSeeder::class,
             SettingSeeder::class,
             FeatureSeeder::class,

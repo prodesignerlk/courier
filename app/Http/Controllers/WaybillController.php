@@ -114,7 +114,7 @@ class WaybillController extends Controller
                 return back()->with(['error' => 'Waybill reserved failed.', 'error_type' => 'error']);
             }
         }
-        
+
         return back()->with(['success' => 'Waybill reserved successful.']);
     }
 
@@ -125,7 +125,7 @@ class WaybillController extends Controller
 
         $waybill_id = request('waybill_id');
         $package_details = Package::where('waybill_id',  $waybill_id);
-        
+
         if($user->hasRole('Seller')){
             $seller_id = Seller::where('user_id', $user->id)->first()->seller_id;
             $package_details = $package_details->where('seller_id', $seller_id);
@@ -133,7 +133,7 @@ class WaybillController extends Controller
 
         if($package_details->count() > 0){
             $package_details = $package_details->first();
-            
+
             $seller_details = $package_details->seller;
             $order_details = $package_details->order;
 
@@ -155,7 +155,7 @@ class WaybillController extends Controller
             $city_details = 'null';
             $district_details = 'null';
         }
-    
+
         return response()->json(['district_details' => $district_details, 'city_details' => $city_details, 'seller_details' => $seller_details, 'package_details' => $package_details, 'receiver_details' => $receiver_details, 'order_details' => $order_details]);
     }
 }

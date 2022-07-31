@@ -16,8 +16,10 @@ class CreatePermissionListsTable extends Migration
         Schema::create('permission_lists', function (Blueprint $table) {
             $table->id('permission_list_id');
             $table->string('name');
-            $table->boolean('view');
-            $table->boolean('create');
+            $table->enum('view', [0, 1]);
+            $table->enum('create' ,[0, 1]);
+            $table->enum('confirm', [0, 1]);
+            $table->enum('mark', [0, 1]);
             $table->timestamps();
         });
     }

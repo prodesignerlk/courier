@@ -1,6 +1,6 @@
 @php
     if(Session::has('success')){
-        toast(Session::get('success'), 'success')->timerProgressBar()->width('300px');
+        toast(Session::get('success'), 'success')->timerProgressBar();
         Session::forget('success');
     }
 

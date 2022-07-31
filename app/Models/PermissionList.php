@@ -12,4 +12,12 @@ class PermissionList extends Model
     protected $table = 'permission_lists';
 
     protected $primaryKey = 'permission_list_id';
+
+    protected $fillable = [
+      'name',
+      'view',
+      'create',
+      'confirm',
+      'mark',
+    ];
 }

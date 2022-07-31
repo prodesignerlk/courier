@@ -16,9 +16,9 @@ class OrderStatusSeeder extends Seeder
     {
         $status = [
             '1' => ['status' => 'Processing', 'color' => 'yellow'],
-            '2' => ['status' => 'Pickup colleded ny branch', 'color' => 'green'],
-            '3' => ['status' => 'Pickup despated by branch', 'color' => 'blue'],
-            '4' => ['status' => 'Pickup/reroute colledted by delivery hub', 'color' => 'perple'],
+            '2' => ['status' => 'Pickup collected ny branch', 'color' => 'green'],
+            '3' => ['status' => 'Pickup dispatched by branch', 'color' => 'blue'],
+            '4' => ['status' => 'Pickup/reroute collected by delivery hub', 'color' => 'perple'],
             '5' => ['status' => 'Dispatched', 'color' => 'aqua'],
             '6' => ['status' => 'Received by branch', 'color' => 'ash'],
             '7' => ['status' => 'Assign to agent', 'color' => 'brown'],
@@ -28,7 +28,7 @@ class OrderStatusSeeder extends Seeder
             '11' => ['status' => 'Reroute', 'color' => 'pink'],
             '12' => ['status' => 'Return', 'color' => 'salmon'],
             '13' => ['status' => 'Return collected by delivery hub', 'color' => 'darkRed'],
-            '14' => ['status' => 'Return to Seller', 'color' => 'lightGReen'],
+            '14' => ['status' => 'Return to Seller', 'color' => 'lightGreen'],
         ];
 
         foreach ($status as $st) {

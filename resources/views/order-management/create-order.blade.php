@@ -100,7 +100,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label for="">City :</label>
+                                    <label for="">City :</label><br>
                                     <select name="city_id" id="city_id"
                                         class="form-control js-example-basic-single @error('city_id') is-invalid @enderror">
                                         <option value="" disabled selected>Select City</option>
@@ -195,7 +195,7 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-9">
-                                    <label for="">Pickup Branch :</label>
+                                    <label for="">Pickup Branch :</label><br>
                                     <select name="bulk_pickup_branch_id" id=""
                                         class="form-control js-example-basic-single @error('bulk_pickup_branch_id') is-invalid @enderror">
                                         <option value="" disabled selected>Select Pickup Branch</option>

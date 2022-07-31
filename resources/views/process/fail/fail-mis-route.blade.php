@@ -40,7 +40,7 @@
                                         @php
                                             $seller = $user->seller;
                                         @endphp
-                                        <option value="{{ $seller->seller_id }}">{{ $seller->seller_name }}
+                                        <option value="{{ $seller->seller_id }}">{{ $user->name }}
                                         </option>
                                     @endforeach
                                 </select>
