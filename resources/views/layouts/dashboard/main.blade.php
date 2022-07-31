@@ -156,7 +156,7 @@
             </div>
             <footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between">
                 <p class="text-muted text-center text-md-left">Copyright © {{date('Y')}} <a href="https://www.prodesigner.lk"
-                        target="_blank">SAK</a>. All rights reserved</p>
+                        target="_blank">Prodesigner Global</a>. All rights reserved</p>
                 <p class="text-muted text-center text-md-left mb-0 d-none d-md-block">v{{ config('app.version') }}</p>
             </footer>
         </div>
