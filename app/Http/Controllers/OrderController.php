@@ -86,7 +86,7 @@ class OrderController extends Controller
                 $receiver_info = Receiver::create([
                     'receiver_name' => request('cus_name'),
                     'receiver_contact' => request('cus_contact'),
-                    'receiver_conatct_2' => request('cus_contact_2'),
+                    'receiver_contact_2' => request('cus_contact_2'),
                     'receiver_address' => request('cus_address'),
                     'receiver_city_id' => request('city_id'),
                     'receiver_district_id' => request('district_id'),
@@ -163,7 +163,7 @@ class OrderController extends Controller
         }
 
         if ($user->hasRole('Seller')) {
-            $user_details = User::where('idi', $user->id)->get();
+            $user_details = User::where('id', $user->id)->get();
             $branch_details = Branch::where('status', '1')->get();
         } elseif ($user->branch_staff == 1) {
             $branch_details = $user->staff->branch;
@@ -249,8 +249,8 @@ class OrderController extends Controller
             ->editColumn('date', function ($query) use ($search_st) {
                 return $query->$search_st;
             })
-            ->editColumn('receiver_conatct_2', function ($query) {
-                if ($query->receiver_conatct_2) return $query->receiver_conatct_2;
+            ->editColumn('receiver_contact_2', function ($query) {
+                if ($query->receiver_contact_2) return $query->receiver_contact_2;
                 else return 'N/A';
             })
             ->editColumn('branch', function ($query) {
@@ -287,7 +287,7 @@ class OrderController extends Controller
         }
 
         if ($user->hasRole('Seller')) {
-            $user_details = User::where('idi', $user->id)->get();
+            $user_details = User::where('id', $user->id)->get();
             $branch_details = Branch::where('status', '1')->get();
         } elseif ($user->branch_staff == 1) {
             $branch_details = $user->staff->branch;
@@ -357,8 +357,8 @@ class OrderController extends Controller
                     return 'N/A';
                 }
             })
-            ->editColumn('receiver_conatct_2', function ($query) {
-                if ($query->receiver_conatct_2) return $query->receiver_conatct_2;
+            ->editColumn('receiver_contact_2', function ($query) {
+                if ($query->receiver_contact_2) return $query->receiver_contact_2;
                 else return 'N/A';
             })
             ->editColumn('action', function ($query) {
@@ -382,7 +382,7 @@ class OrderController extends Controller
         }
 
         if ($user->hasRole('Seller')) {
-            $user_details = User::where('idi', $user->id)->get();
+            $user_details = User::where('id', $user->id)->get();
             $branch_details = Branch::where('status', '1')->get();
         } elseif ($user->branch_staff == 1) {
             $branch_details = $user->staff->branch;
@@ -453,8 +453,8 @@ class OrderController extends Controller
                     return 'N/A';
                 }
             })
-            ->editColumn('receiver_conatct_2', function ($query) {
-                if ($query->receiver_conatct_2) return $query->receiver_conatct_2;
+            ->editColumn('receiver_contact_2', function ($query) {
+                if ($query->receiver_contact_2) return $query->receiver_contact_2;
                 else return 'N/A';
             })
             ->editColumn('action', function ($query) {
@@ -478,7 +478,7 @@ class OrderController extends Controller
         }
 
         if ($user->hasRole('Seller')) {
-            $user_details = User::where('idi', $user->id)->get();
+            $user_details = User::where('id', $user->id)->get();
             $branch_details = Branch::where('status', '1')->get();
         } elseif ($user->branch_staff == 1) {
             $branch_details = $user->staff->branch;
@@ -549,8 +549,8 @@ class OrderController extends Controller
                     return 'N/A';
                 }
             })
-            ->editColumn('receiver_conatct_2', function ($query) {
-                if ($query->receiver_conatct_2) return $query->receiver_conatct_2;
+            ->editColumn('receiver_contact_2', function ($query) {
+                if ($query->receiver_contact_2) return $query->receiver_contact_2;
                 else return 'N/A';
             })
             ->editColumn('action', function ($query) {
@@ -575,7 +575,7 @@ class OrderController extends Controller
         }
 
         if ($user->hasRole('Seller')) {
-            $user_details = User::where('idi', $user->id)->get();
+            $user_details = User::where('id', $user->id)->get();
             $branch_details = Branch::where('status', '1')->get();
         } elseif ($user->branch_staff == 1) {
             $branch_details = $user->staff->branch;
@@ -649,8 +649,8 @@ class OrderController extends Controller
                     return 'N/A';
                 }
             })
-            ->editColumn('receiver_conatct_2', function ($query) {
-                if ($query->receiver_conatct_2) return $query->receiver_conatct_2;
+            ->editColumn('receiver_contact_2', function ($query) {
+                if ($query->receiver_contact_2) return $query->receiver_contact_2;
                 else return 'N/A';
             })
             ->editColumn('action', function ($query) {
@@ -674,7 +674,7 @@ class OrderController extends Controller
         }
 
         if ($user->hasRole('Seller')) {
-            $user_details = User::where('idi', $user->id)->get();
+            $user_details = User::where('id', $user->id)->get();
             $branch_details = Branch::where('status', '1')->get();
         } elseif ($user->branch_staff == 1) {
             $branch_details = $user->staff->branch;
@@ -748,8 +748,8 @@ class OrderController extends Controller
                     return 'N/A';
                 }
             })
-            ->editColumn('receiver_conatct_2', function ($query) {
-                if ($query->receiver_conatct_2) return $query->receiver_conatct_2;
+            ->editColumn('receiver_contact_2', function ($query) {
+                if ($query->receiver_contact_2) return $query->receiver_contact_2;
                 else return 'N/A';
             })
             ->editColumn('action', function ($query) {
@@ -773,7 +773,7 @@ class OrderController extends Controller
         }
 
         if ($user->hasRole('Seller')) {
-            $user_details = User::where('idi', $user->id)->get();
+            $user_details = User::where('id', $user->id)->get();
             $branch_details = Branch::where('status', '1')->get();
         } elseif ($user->branch_staff == 1) {
             $branch_details = $user->staff->branch;
@@ -847,8 +847,8 @@ class OrderController extends Controller
                     return 'N/A';
                 }
             })
-            ->editColumn('receiver_conatct_2', function ($query) {
-                if ($query->receiver_conatct_2) return $query->receiver_conatct_2;
+            ->editColumn('receiver_contact_2', function ($query) {
+                if ($query->receiver_contact_2) return $query->receiver_contact_2;
                 else return 'N/A';
             })
             ->editColumn('action', function ($query) {
@@ -872,7 +872,7 @@ class OrderController extends Controller
         }
 
         if ($user->hasRole('Seller')) {
-            $user_details = User::where('idi', $user->id)->get();
+            $user_details = User::where('id', $user->id)->get();
             $branch_details = Branch::where('status', '1')->get();
         } elseif ($user->branch_staff == 1) {
             $branch_details = $user->staff->branch;
@@ -946,8 +946,8 @@ class OrderController extends Controller
                     return 'N/A';
                 }
             })
-            ->editColumn('receiver_conatct_2', function ($query) {
-                if ($query->receiver_conatct_2) return $query->receiver_conatct_2;
+            ->editColumn('receiver_contact_2', function ($query) {
+                if ($query->receiver_contact_2) return $query->receiver_contact_2;
                 else return 'N/A';
             })
             ->editColumn('action', function ($query) {
@@ -974,7 +974,7 @@ class OrderController extends Controller
         }
 
         if ($user->hasRole('Seller')) {
-            $user_details = User::where('idi', $user->id)->get();
+            $user_details = User::where('id', $user->id)->get();
             $branch_details = Branch::where('status', '1')->get();
         } elseif ($user->branch_staff == 1) {
             $branch_details = $user->staff->branch;
@@ -996,7 +996,7 @@ class OrderController extends Controller
     {
         /** @var User $user */
         $user = Auth::user();
-        $permission = $user->can('order-ssign-to-agent.view');
+        $permission = $user->can('order-assign-to-agent.view');
 
         if (!$permission) {
             abort(403);
@@ -1054,8 +1054,8 @@ class OrderController extends Controller
                     return 'N/A';
                 }
             })
-            ->editColumn('receiver_conatct_2', function ($query) {
-                if ($query->receiver_conatct_2) return $query->receiver_conatct_2;
+            ->editColumn('receiver_contact_2', function ($query) {
+                if ($query->receiver_contact_2) return $query->receiver_contact_2;
                 else return 'N/A';
             })
             ->editColumn('attemp', function ($query) {
@@ -1098,7 +1098,7 @@ class OrderController extends Controller
         }
 
         if ($user->hasRole('Seller')) {
-            $user_details = User::where('idi', $user->id)->get();
+            $user_details = User::where('id', $user->id)->get();
             $branch_details = Branch::where('status', '1')->get();
         } elseif ($user->branch_staff == 1) {
             $branch_details = $user->staff->branch;
@@ -1178,8 +1178,8 @@ class OrderController extends Controller
                     return 'N/A';
                 }
             })
-            ->editColumn('receiver_conatct_2', function ($query) {
-                if ($query->receiver_conatct_2) return $query->receiver_conatct_2;
+            ->editColumn('receiver_contact_2', function ($query) {
+                if ($query->receiver_contact_2) return $query->receiver_contact_2;
                 else return 'N/A';
             })
             ->editColumn('action', function ($query) {
@@ -1203,7 +1203,7 @@ class OrderController extends Controller
         }
 
         if ($user->hasRole('Seller')) {
-            $user_details = User::where('idi', $user->id)->get();
+            $user_details = User::where('id', $user->id)->get();
             $branch_details = Branch::where('status', '1')->get();
         } elseif ($user->branch_staff == 1) {
             $branch_details = $user->staff->branch;
@@ -1286,8 +1286,8 @@ class OrderController extends Controller
                     return 'N/A';
                 }
             })
-            ->editColumn('receiver_conatct_2', function ($query) {
-                if ($query->receiver_conatct_2) return $query->receiver_conatct_2;
+            ->editColumn('receiver_contact_2', function ($query) {
+                if ($query->receiver_contact_2) return $query->receiver_contact_2;
                 else return 'N/A';
             })
             ->editColumn('action', function ($query) {
@@ -1330,7 +1330,7 @@ class OrderController extends Controller
         }
 
         if ($user->hasRole('Seller')) {
-            $user_details = User::where('idi', $user->id)->get();
+            $user_details = User::where('id', $user->id)->get();
             $branch_details = Branch::where('status', '1')->get();
         } elseif ($user->branch_staff == 1) {
             $branch_details = $user->staff->branch;
@@ -1412,8 +1412,8 @@ class OrderController extends Controller
                     return 'N/A';
                 }
             })
-            ->editColumn('receiver_conatct_2', function ($query) {
-                if ($query->receiver_conatct_2) return $query->receiver_conatct_2;
+            ->editColumn('receiver_contact_2', function ($query) {
+                if ($query->receiver_contact_2) return $query->receiver_contact_2;
                 else return 'N/A';
             })
             ->editColumn('action', function ($query) {
@@ -1456,7 +1456,7 @@ class OrderController extends Controller
         }
 
         if ($user->hasRole('Seller')) {
-            $user_details = User::where('idi', $user->id)->get();
+            $user_details = User::where('id', $user->id)->get();
             $branch_details = Branch::where('status', '1')->get();
         } elseif ($user->branch_staff == 1) {
             $branch_details = $user->staff->branch;

@@ -16,7 +16,7 @@ class Receiver extends Model
     protected $fillable = [
         'receiver_name',
         'receiver_contact',
-        'receiver_conatct_2',
+        'receiver_contact_2',
         'receiver_address',
         'receiver_city_id',
         'receiver_district_id'

@@ -17,12 +17,12 @@ class CreateReceiversTable extends Migration
             $table->id('receiver_id');
             $table->string('receiver_name');
             $table->string('receiver_contact');
-            $table->string('receiver_conatct_2')->nullable();
+            $table->string('receiver_contact_2')->nullable();
 
             $table->text('receiver_address');
             $table->unsignedBigInteger('receiver_city_id')->nullable();
             $table->unsignedBigInteger('receiver_district_id')->nullable();
-            
+
             $table->timestamps();
         });
     }

@@ -28,9 +28,9 @@ class CreateSellersTable extends Migration
 
             //payment
             $table->integer('payment_period');
-            $table->integer('regular_price');
-            $table->integer('extra_price');
-            $table->integer('handling_fee');
+            $table->integer('regular_price')->default('280');
+            $table->integer('extra_price')->default('80');
+            $table->integer('handling_fee')->default(1);
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

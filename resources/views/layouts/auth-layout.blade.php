@@ -11,13 +11,16 @@
     <link rel="stylesheet" href="{{url('assets/vendors/flag-icon-css/css/flag-icon.min.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/demo_1/style.css')}}">
     <link rel="shortcut icon" href="{{url('assets/images/favicon.png')}}" />
+    <link rel="stylesheet" href="{{ url('assets/vendors/select2/select2.min.css') }}">
+
 </head>
 
 <body class="sidebar-dark">
     <div class="main-wrapper">
         @yield('content')
-        
+
     </div>
+    <script src="{{ url('assets/vendors/select2/select2.min.js') }}"></script>
     <script src="{{url('assets/vendors/core/core.js')}}"></script>
     <script src="{{url('assets/vendors/feather-icons/feather.min.js')}}"></script>
     <script src="{{url('assets/js/template.js')}}"></script>

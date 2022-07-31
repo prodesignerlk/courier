@@ -27,8 +27,8 @@
                                             $branch_info = App\Models\Staff::find($staff_info->staff_id)->branch;
                                         @endphp
                                         {{-- value --->>>> staff_id --}}
-                                        <option value="{{ $staff_info->staff_id }}">{{ $rider->name }} -
-                                            {{ $branch_info->branch_code }} {{ $branch_info->branch_name }}</option>
+                                        <option value="{{ $staff_info->staff_id }}">{{ $rider->name }}
+                                            @if(isset($branch_info->branch_code)){{ ' - '.$branch_info->branch_code }} {{ $branch_info->branch_name }} @endif</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -78,7 +78,7 @@
                                         @php
                                             $seller = $user->seller;
                                         @endphp
-                                        <option value="{{ $seller->seller_id }}">{{ $seller->seller_name }}
+                                        <option value="{{ $seller->seller_id }}">{{ $user->name }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -93,8 +93,8 @@
                                             $branch_info = App\Models\Staff::find($staff_info->staff_id)->branch;
                                         @endphp
                                         {{-- value --->>>> staff_id --}}
-                                        <option value="{{ $staff_info->staff_id }}">{{ $rider->name }} -
-                                            {{ $branch_info->branch_code }} {{ $branch_info->branch_name }}</option>
+                                        <option value="{{ $staff_info->staff_id }}">{{ $rider->name }}
+                                            @if(isset($branch_info->branch_code)){{ ' - '.$branch_info->branch_code }} {{ $branch_info->branch_name }} @endif</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -206,8 +206,8 @@
                             name: 'receiver_contact'
                         },
                         {
-                            data: 'receiver_conatct_2',
-                            name: 'receiver_conatct_2'
+                            data: 'receiver_contact_2',
+                            name: 'receiver_contact_2'
                         },
                         {
                             data: 'cod_amount',

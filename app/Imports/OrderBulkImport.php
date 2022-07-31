@@ -20,11 +20,11 @@ use Maatwebsite\Excel\Concerns\WithValidation;
 class OrderBulkImport implements ToModel, SkipsEmptyRows, WithHeadingRow, WithValidation, SkipsOnError
 {
     use Importable, SkipsErrors;
-    private $data; 
+    private $data;
 
     public function __construct(array $data = [])
     {
-        $this->data = $data; 
+        $this->data = $data;
     }
 
     /**
@@ -46,7 +46,7 @@ class OrderBulkImport implements ToModel, SkipsEmptyRows, WithHeadingRow, WithVa
         if($user->hasRole('Seller')){
             $seller = User::find($user->id)->seller;
             $waybill_details = Package::where([['waybill_id', $row['waybill_id']], ['seller_id', $seller->seller_id], ['package_used_status', 0]])->count();
-            
+
         } else{
             $seller_id = $row['seller_id'];
             $waybill_details = Package::where([['waybill_id', $row['waybill_id']], ['seller_id', $seller_id], ['package_used_status', 0]])->count();
@@ -62,7 +62,7 @@ class OrderBulkImport implements ToModel, SkipsEmptyRows, WithHeadingRow, WithVa
                 $receiver_info = Receiver::create([
                     'receiver_name' => $row['recipient_name'],
                     'receiver_contact' => $row['contact_no_1'],
-                    'receiver_conatct_2' => $row['contact_no_2'],
+                    'receiver_contact_2' => $row['contact_no_2'],
                     'receiver_address' => $row['address'],
                 ]);
 
@@ -92,6 +92,6 @@ class OrderBulkImport implements ToModel, SkipsEmptyRows, WithHeadingRow, WithVa
             'contact_no_2' => 'nullable|min:9|max:10',
             'address' => 'required',
             'remark' => 'nullable',
-        ];       
+        ];
     }
 }

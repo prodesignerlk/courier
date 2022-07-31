@@ -19,25 +19,20 @@
     <link rel="stylesheet" href="{{ url('assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
     <link rel="stylesheet" href="{{ url('assets/css/demo_1/style.css') }}">
     <link rel="stylesheet" href="{{ url('assets/vendors/sweetalert2/sweetalert2.min.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/vendors/jquery-steps/jquery.steps.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" href="style.css">
+
+
+    {{--jquery validator css--}}
+    <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+
+    <link rel="shortcut icon" href="{{ url('assets/images/favicon.png') }}"/>
 
     <script src="{{ url('assets/vendors/core/core.js') }}"></script>
 
-
-    <link rel="shortcut icon" href="{{ url('assets/images/favicon.png') }}" />
-    <link rel="stylesheet" href="{{ url('assets/css/validation/validation.css') }}">
-    <link rel="stylesheet" href="{{ url('assets/css/main.css') }}">
-    <link rel="stylesheet" href="{{ url('assets/css/custom-color/custom-color.css') }}">
-
-    <!--Link the jquery ui file-->
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-
-    <!--Link the jquery ui file-->
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
 
@@ -51,7 +46,7 @@
                 </a>
                 <div class="navbar-content">
                     <ul class="navbar-nav">
-                        <li class="nav-item dropdown nav-notifications">
+                        {{--<li class="nav-item dropdown nav-notifications">
                             <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i data-feather="bell"></i>
@@ -115,32 +110,32 @@
                                     <a href="javascript:;">View all</a>
                                 </div>
                             </div>
-                        </li>
+                        </li>--}}
                         <li class="nav-item dropdown nav-profile">
                             <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="https://via.placeholder.com/30x30" alt="profile">
+                                <img src="{{url('assets/images/face.png')}}" alt="profile">
                             </a>
                             <div class="dropdown-menu" aria-labelledby="profileDropdown">
                                 <div class="dropdown-header d-flex flex-column align-items-center">
                                     <div class="figure mb-3">
-                                        <img src="https://via.placeholder.com/80x80" alt="">
+                                        <img src="{{url('assets/images/face.png')}}" alt="profile">
                                     </div>
                                     <div class="info text-center">
-                                        <p class="name font-weight-bold mb-0">Amiah Burton</p>
-                                        <p class="email text-muted mb-3">amiahburton@gmail.com</p>
+                                        <p class="name font-weight-bold mb-0">{{\Illuminate\Support\Facades\Auth::user()->name}}</p>
+                                        <p class="email text-muted mb-3">{{\Illuminate\Support\Facades\Auth::user()->email}}</p>
                                     </div>
                                 </div>
                                 <div class="dropdown-body">
                                     <ul class="profile-nav p-0 pt-3">
-                                        <li class="nav-item">
+                                        {{--<li class="nav-item">
                                             <a href="#" class="nav-link">
                                                 <i data-feather="user"></i>
                                                 <span>Profile</span>
                                             </a>
-                                        </li>
+                                        </li>--}}
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link">
+                                            <a href="{{route('logout')}}" class="nav-link">
                                                 <i data-feather="log-out"></i>
                                                 <span>Log Out</span>
                                             </a>
@@ -160,16 +155,15 @@
 
             </div>
             <footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between">
-                <p class="text-muted text-center text-md-left">Copyright © 2022 <a href="https://www.prodesigner.lk"
-                        target="_blank">COURIER PRO</a>. All rights reserved</p>
-                <p class="text-muted text-center text-md-left mb-0 d-none d-md-block">v{{ env('APP_VERSION') }}</p>
+                <p class="text-muted text-center text-md-left">Copyright © {{date('Y')}} <a href="https://www.prodesigner.lk"
+                        target="_blank">SAK</a>. All rights reserved</p>
+                <p class="text-muted text-center text-md-left mb-0 d-none d-md-block">v{{ config('app.version') }}</p>
             </footer>
         </div>
     </div>
 
     <script src="{{ url('assets/js/select2.js') }}"></script>
     <script src="{{ url('assets/vendors/select2/select2.min.js') }}"></script>
-    <script src="{{ url('assets/vendors/jquery-validation/jquery.validate.min.js') }}"></script>
     <script src="{{ url('assets/vendors/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
     <script src="{{ url('assets/vendors/inputmask/jquery.inputmask.min.js') }}"></script>
     <script src="{{ url('assets/vendors/typeahead.js/typeahead.bundle.min.js') }}"></script>
@@ -186,6 +180,7 @@
     <script src="{{ url('assets/js/bootstrap-maxlength.js') }}"></script>
     <script src="{{ url('assets/js/inputmask.js') }}"></script>
     <script src="{{ url('assets/js/typeahead.js') }}"></script>
+    <script src="{{ url('assets/js/file-upload.js') }}"></script>
     <script src="{{ url('assets/js/tags-input.js') }}"></script>
     <script src="{{ url('assets/js/dropzone.js') }}"></script>
     <script src="{{ url('assets/js/dropify.js') }}"></script>
@@ -194,9 +189,9 @@
     <script src="{{ url('assets/js/timepicker.js') }}"></script>
     <script src="{{ url('assets/vendors/sweetalert2/sweetalert2.min.js') }}"></script>
     <script src="{{ url('assets/vendors/promise-polyfill/polyfill.min.js') }}"></script>
+    <script src="{{ url('assets/js/sweet-alert.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="{{ url('assets/vendors/prismjs/prism.js') }}"></script>
-	<script src="{{ url('/assets/vendors/clipboard/clipboard.min.js') }}"></script>
+    <script src="{{ url('assets/vendors/jquery-steps/jquery.steps.min.js') }}"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"></script>
@@ -206,12 +201,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"></script>
-    <script src="{{ url('assets/js/validation/form-validateion.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url('assets/vendors/jquery-validation/jquery.validate.min.js') }}"></script>
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="{{url('assets/js/Custom/leads.js')}}"></script>
+    <script src="{{url('assets/js/Custom/notification.js')}}"></script>
+    <script src="{{ url('assets/js/Custom/studentInformation.js') }}"></script>
 
 
     @stack('scripts')

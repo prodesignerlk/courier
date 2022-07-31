@@ -3,6 +3,7 @@
 use App\Http\Controllers\DistrictCityController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\RiderController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\StatusChangeController;
@@ -130,13 +131,21 @@ Route::post('/finance/make-payment-confirm', [\App\Http\Controllers\FinanceContr
 
 // Common Ajax================================================================================================================================
 Route::post('/ajax/get-sellers-details', [SellerController::class, 'get_all_seller_details'])->name('get_seller_details');
-Route::post('/ajaz/get-package-details', [WaybillController::class, 'get_waybill_details'])->name('get_waybill_details');
-Route::post('/ajaz/get-district-city', [DistrictCityController::class, 'districts_city'])->name('districts_city');
+Route::post('/ajax/get-package-details', [WaybillController::class, 'get_waybill_details'])->name('get_waybill_details');
+Route::post('/ajax/get-district-city', [DistrictCityController::class, 'districts_city'])->name('districts_city');
+
+//seller
+Route::get('/seller-registration', [SellerController::class, 'seller_view_and_create'])->name('seller_view_and_create');
+Route::get('/seller/data-table-view',[SellerController::class, 'seller_view_table'])->name('seller_view_table');
+
+//rider
+Route::get('/rider-registration', [RiderController::class, 'rider_view_and_create'])->name('rider_view_and_create');
+Route::post('/rider-registration', [RiderController::class, 'rider_register'])->name('rider_register');
+Route::get('/rider/data-table-view',[RiderController::class, 'rider_view_table'])->name('rider_view_table');
 
 
 //logout
 Route::get('/logout', function() {Auth::logout(); return redirect('/login');});
-
 Route::get('/getuser', [HomeController::class, 'getuser'])->name('getuser');
 
 Route::get('/general-settings', function () {return view('/settings/general');})->name('general-settings');
@@ -144,34 +153,20 @@ Route::get('/default-settings', function () {return view('/settings/default-sett
 
 
 // HO (Returns)
-Route::get('/fail/received-ho', function () {
-    return view('/process/fail/fail-received-ho');
-});
+Route::get('/fail/received-ho', function () {return view('/process/fail/fail-received-ho');});
 // Return to Client
 Route::get('/fail/return', function () {
     return view('/process/fail/fail-return');
 });
 
-// Return to Client
-Route::get('/client-registration', function () {
-    return view('/client-reg');
-});
 
-// Finance
+
 
 // Barcode Layout
 Route::get('/barcode', function () {
     return view('/order-management/barcode');
 });
 
-// login
-Route::get('/new-login', function () {
-    return view('/auth/new-login');
-});
-
-Route::get('/new-register', function () {
-    return view('/auth/new-register');
-});
 
 Route::get('/new-verify-contact', function () {
     return view('/auth/new-verify-contact');

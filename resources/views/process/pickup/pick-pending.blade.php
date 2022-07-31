@@ -37,7 +37,7 @@
                                         @php
                                             $seller = $user->seller;
                                         @endphp
-                                        <option value="{{ $seller->seller_id }}">{{ $seller->seller_name }}</option>
+                                        <option value="{{ $seller->seller_id }}">{{ $user->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -142,8 +142,8 @@
                         name: 'receiver_contact'
                     },
                     {
-                        data: 'receiver_conatct_2',
-                        name: 'receiver_conatct_2'
+                        data: 'receiver_contact_2',
+                        name: 'receiver_contact_2'
                     },
                     {
                         data: 'cod_amount',
