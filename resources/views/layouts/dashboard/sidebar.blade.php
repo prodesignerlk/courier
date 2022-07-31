@@ -51,7 +51,7 @@
 <nav class="sidebar">
     <div class="sidebar-header">
         <a href="{{route('home')}}" class="sidebar-brand">
-            Adwara<span>.lk</span>
+            Courier<span>Pro</span>
         </a>
         <div class="sidebar-toggler not-active">
             <span></span>
